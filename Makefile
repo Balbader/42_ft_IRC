@@ -10,6 +10,30 @@ INC_DIR		:=	./inc
 
 SRCS_DIR	:=	./srcs
 SRCS		:=	\
+				$(addprefix class/, 	\
+					$(addprefix cmd/, 	\
+						DIE.cpp 		\
+						JOIN.cpp 		\
+						KICK.cpp 		\
+						KILL.cpp 		\
+						MODE.cpp 		\
+						MOTD.cpp 		\
+						NICK.cpp 		\
+						OPER.cpp 		\
+						PART.cpp 		\
+						PASS.cpp 		\
+						PING.cpp 		\
+						PRIVMESS.cpp	\
+						QUIT.cpp		\
+						USER.cpp		\
+						WHOIS.cpp		\
+					)
+					Channel.cpp			\
+					Config.cpp			\
+					Server.cpp			\
+					User.cpp			\
+				)
+				toString.cpp			\
 				main.cpp
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 
