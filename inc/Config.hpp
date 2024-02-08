@@ -25,6 +25,7 @@ private:
 	std::map<std::string const, std:;string> _lookupValues;
 
 	static std::pair<std::string const, std::string const> _arrayValues;
+
 /* ArrayValues:
  * 		server_name,
  * 		server_version,
