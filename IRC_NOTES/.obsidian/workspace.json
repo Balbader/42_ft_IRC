@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Authorized Functions/poll.md",
+                "file": "Authorized Functions/kqueue.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Authorized Functions/poll.md",
+                "file": "Authorized Functions/kqueue.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Authorized Functions/poll.md",
+                "file": "Authorized Functions/kqueue.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Authorized Functions/poll.md"
+                "file": "Authorized Functions/kqueue.md"
               }
             }
           }
@@ -148,8 +148,10 @@
   },
   "active": "a33ab45ed1a1c0eb",
   "lastOpenFiles": [
-    "Authorized Functions/fcntl.md",
+    "Authorized Functions/select.md",
+    "Authorized Functions/kqueue.md",
     "Authorized Functions/poll.md",
+    "Authorized Functions/fcntl.md",
     "Authorized Functions/fstat.md",
     "Authorized Functions/lseek.md",
     "Authorized Functions/sigaction.md",
@@ -172,8 +174,6 @@
     "Authorized Functions/getaddrinfo.md",
     "Authorized Functions/getprotobyname.md",
     "Authorized Functions/getsockname.md",
-    "Authorized Functions/Setsockopt.md",
-    "Authorized Functions/Socket.md",
     "Authorized Functions"
   ]
 }
