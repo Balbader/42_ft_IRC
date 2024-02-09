@@ -6,6 +6,7 @@
 #include <vector>
 #include <User.hpp>
 
+#define DEBUG 0
 
 class User;
 
