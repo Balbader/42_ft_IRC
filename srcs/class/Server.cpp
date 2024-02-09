@@ -218,7 +218,7 @@ bool Server::recvAll(void)
 }
 
 // Append a line to the message to send to an user client.
-// line The line to append.
+// line: The line to append.
 // true if success, false otherwise.
 bool Server::replyPush(User &user, std::string const &line) {
 	try {
