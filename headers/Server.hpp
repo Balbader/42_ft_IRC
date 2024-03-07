@@ -1,5 +1,4 @@
-#ifndef __SERVER_HPP
-#define __SERVER_HPP
+#pragma once
 
 /*  This class is temporarily		*/
 #include <iostream>
@@ -102,6 +101,3 @@ class Server
 #include "Client.hpp"
 #include "Request.hpp"
 #include "File.hpp"
-
-#endif
-
