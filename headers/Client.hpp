@@ -61,12 +61,11 @@ public:
     std::string	getAllChannels() const;
     std::map<std::string, Channel*>	getJoinedChannels()	const;
 
-
     // Setters
     void setUserName(std::string UserName);
     void setNickName(std::string NickName);
     void setFullName(std::string FullName);
-    // void			setHost(std::string Host);
+    // void	setHost(std::string Host);
     void setID(std::string ID);
     void setClientfd(int clientfd);
     void setAuth(int Auth);
