@@ -42,8 +42,12 @@ std::string	Server::_DeezNuts( Request req, int i )
 			return (this->_clients[i]->getUserInfo());
 		else if (req.args[0] == "1")
 			return (this->_clients[i]->getAllChannels());
-		else if (req.args[0] == "2")
-			return ("Online Users: " + std::to_string(this->_online_c - 1) + "\n");
+		else if (req.args[0] == "2") {
+            std::stringstream ss_online_c;
+            ss_online_c << this->_online_c - 1;
+            std::string tmp_online_c = ss_online_c.str();
+            return ("Online Users: " + tmp_online_c + "\n");
+        }
 		else if (req.args[0] == "3")
 			return (_listAllChannels());
 		else if (req.args[0] == "4")
@@ -64,9 +68,22 @@ std::string	Server::_DeezNuts( Request req, int i )
 std::string Server::_serverInfo() const
 {
 	std::string server("Server Name: " + this->_name + "\n");
-	server.append("Online Users: " + std::to_string(this->_online_c - 1) + "\n");
-	server.append("Max Online Users: " + std::to_string(this->_max_online_c) + "\n");
-	server.append("Number of Channels in the Server: " + std::to_string(this->_allChannels.size()) + "\n");
+
+    std::stringstream ss_online_c;
+    ss_online_c << this->_online_c - 1;
+    std::string tmp_online_c = ss_online_c.str();
+	server.append("Online Users: " + tmp_online_c + "\n");
+
+    std::stringstream ss_max_online;
+    ss_max_online << this->_max_online_c;
+    std::string tmp_max_online = ss_max_online.str();
+	server.append("Max Online Users: " + tmp_max_online + "\n");
+
+    std::stringstream ss_allChannels;
+    ss_allChannels << this->_allChannels.size();
+    std::string tmp_allChannels = ss_allChannels.str();
+	server.append("Number of Channels in the Server: " + tmp_allChannels + "\n");
+
 	return (server);
 }
 
@@ -80,7 +97,11 @@ std::string Server::_channelInfo(std::string ChannelName, int i)
 			std::string Info;
 			Info.append("Channel Name: " + it->second->getName() + "\n");
 			Info.append("Channel Creator: " + it->second->getCreator()->getFullName() + "\n");
-			Info.append("Online Users: " + std::to_string(it->second->getOnlineUsers()) + "\n");
+
+            std::stringstream ss_onlineUsers;
+            ss_onlineUsers << it->second->getOnlineUsers();
+            std::string tmp_onlineUsers = ss_onlineUsers.str();
+			Info.append("Online Users: " + tmp_onlineUsers + "\n");
 			Info.append("Channel Topic: " + it->second->getTopic() + "\n");
 			return (Info);
 		}
@@ -102,7 +123,12 @@ std::string	Server::_listAllChannels() const
 	{
 		channels.append("█              █              █                    █                                  █\n");
 		channels.append("█ " RESET + fillIt(it->first, 12));
-		channels.append(YELLOW " █      " RESET + fillIt(std::to_string(it->second->getOnlineUsers()), 7));
+
+        std::stringstream ss_onlineUsers;
+        ss_onlineUsers << it->second->getOnlineUsers();
+        std::string tmp_onlineUsers = ss_onlineUsers.str();
+        channels.append(YELLOW " █      " RESET + fillIt(tmp_onlineUsers, 7));
+
 		channels.append(YELLOW " █ " RESET + fillIt(it->second->getCreator()->getFullName(), 18));
 		channels.append(YELLOW " █ " RESET + fillIt(it->second->getTopic(), 32));
 		channels.append(YELLOW " █\n");
