@@ -42,14 +42,14 @@ std::string	Server::_printMessage(std::string num, std::string nickname, std::st
 
 void Server::_newClient(void) {
 	struct sockaddr_storage	remotaddr;
-	socklen_t				addrlen;
+	socklen_t addrlen;
 	int newfd;
 
 	addrlen = sizeof remotaddr;
 	newfd = accept(this->_socketfd, (struct sockaddr*)&remotaddr, &addrlen);
+
 	if (newfd == -1)
 		std::cout << "accept() error: " << strerror(errno) << std::endl;
-
 	else {
 		_addToPoll(newfd);
 
