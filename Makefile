@@ -42,7 +42,6 @@ PartCommand.cpp \
 JoinCommand.cpp \
 KickCommand.cpp \
 PrivmsgCommand.cpp \
-FileTransfer.cpp \
 Request.cpp \
 File.cpp \
 
