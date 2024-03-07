@@ -53,13 +53,13 @@ headers/Request.hpp \
 headers/File.hpp \
 
 MAIN = main.cpp
+
 # Define objects for all sources
 OBJS := $(addprefix $(OBJECTSDIR)/, $(SRC_FILES:.cpp=.o))
 MAIN_OBJ = $(addprefix $(OBJECTSDIR)/, $(MAIN:.cpp=.o))
 
 # Name the compiler
-# CC = c++ -Wall -Wextra -Werror -std=c++98 -g3
-CC = c++ 
+CC = c++ -Wall -Wextra -Werror -std=c++98 -g3
 
 # OS specific part
 RM = rm -rf
@@ -71,7 +71,6 @@ ERRIGNORE = 2>/dev/null
 
 all: credit $(NAME)
 	@echo "$(BLUE)██████████████████████ Compiling is DONE ███████████████████████$(RESET)"
-	@echo "       Made with love by : \033[1;91mmbari asfaihi abdel-ke\033[m"
 
 head:
 	@echo "$(BLUE)█████████████████████ Making ft_irc Server █████████████████████$(RESET)"
