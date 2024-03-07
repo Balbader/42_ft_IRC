@@ -1,7 +1,9 @@
 #include "../headers/Server.hpp"
 
-Server::Server() : _name(), _password(), _socketfd(0), _clients(), _pfds(NULL), _online_c(0), _max_online_c(0), _prefix(":"), _allChannels(), _unavailableUserName(), _clientNicknames() {};
+// Constructor
+Server::Server() : _name(), _password(), _socketfd(0), _clients(), _pfds(NULL), _online_c(0), _max_online_c(0), _prefix(":"), _allChannels(), _unavailableUserName(), _clientNicknames() {}
 
+// Overload
 Server::Server(std::string Name, int max_online, std::string Port, std::string Password): _clients() {
 	this->_name = Name;
 	this->_max_online_c = max_online + 1;
@@ -12,8 +14,9 @@ Server::Server(std::string Name, int max_online, std::string Port, std::string P
 	this->_pfds[0].fd = this->_socketfd;
 	this->_pfds[0].events = POLLIN;
 	this->_online_c++;
-};
+}
 
+// Destructor
 Server::~Server() {
 	if (this->_pfds)
 		delete [] this->_pfds;
@@ -33,6 +36,7 @@ Server::~Server() {
 	this->_allChannels.clear();
 }
 
+// Methods
 std::string	Server::_printMessage(std::string num, std::string nickname, std::string message) {
 	if (nickname.empty())
 		nickname = "*";
@@ -49,6 +53,7 @@ void Server::_newClient(void) {
 	newfd = accept(this->_socketfd, (struct sockaddr*)&remotaddr, &addrlen);
 	if (newfd == -1)
 		std::cout << "accept() error: " << strerror(errno) << std::endl;
+
 	else {
 		_addToPoll(newfd);
 
@@ -61,11 +66,10 @@ void Server::_newClient(void) {
 	}
 }
 
-void Server::startServer(void)
-{
-	while (77)
-	{
+void Server::startServer(void) {
+	while (77) {
 		int poll_count = poll(this->_pfds, this->_online_c, -1);
+
 		if (poll_count == -1) {
 			std::cout << "poll() error: " << strerror(errno) << std::endl;
 			exit(-1);
