@@ -1,9 +1,12 @@
 #include "../headers/Channel.hpp"
 
+// Constructor
 Channel::Channel() : _prefix(), _creator(), _onlineUsers(), _name(), _key(), _topic(), _members(), _operators(), _voice(), _banned() {}
 
+// Copy Constructor
 Channel::Channel( const Channel& x ) { *this = x; }
 
+// Constructor overload
 Channel::Channel(std::string channelName, Client *Creator) : _prefix(), _creator(Creator), _onlineUsers(1), _name(channelName), _key(), _topic(), _members(), _operators(), _voice(), _banned() {
 	this->_operators.insert(std::pair<int, Client *>(Creator->getClientfd(), Creator));
 }
@@ -12,8 +15,10 @@ Channel::Channel(std::string channelName, std::string channelKey, Client *Creato
 	this->_operators.insert(std::pair<int, Client *>(Creator->getClientfd(), Creator));
 }
 
+// Destructor
 Channel::~Channel() {}
 
+// Assignment operator
 Channel& Channel::operator=( const Channel& rhs ) {
 	if (this == &rhs)
 		return (*this);
@@ -28,6 +33,7 @@ Channel& Channel::operator=( const Channel& rhs ) {
 	return (*this);
 }
 
+// Getters
 char const &Channel::getPrefix() const { return this->_prefix; }
 int	const &Channel::getOnlineUsers() const { return this->_onlineUsers; }
 std::string	const &Channel::getName() const { return this->_name; }
@@ -39,12 +45,14 @@ std::map<int, Client *>	const &Channel::getVoice() const { return this->_voice; 
 
 Client*	Channel::getCreator() const { return (this->_creator); }
 
+// Setters
 void Channel::setPrefix(char prefix) { this->_prefix = prefix; }
 void Channel::setOnlineUsers(int online) { this->_onlineUsers = online; }
 void Channel::setName(std::string name) { this->_name = name; }
 void Channel::setKey(std::string key) { this->_key = key; }
 void Channel::setTopic(std::string topic) { this->_topic = topic; }
 
+// Methods
 int	Channel::addMember( Client *member ) {
 	if (std::find(this->_banned.begin(), this->_banned.end(), member->getNickName()) != this->_banned.end())
 		return (BANNEDFROMCHAN);
@@ -151,4 +159,4 @@ std::string	Channel::listAllUsers() const
 	}
 
 	return (AllUsers);
-};
+}
