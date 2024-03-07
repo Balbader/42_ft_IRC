@@ -1,11 +1,11 @@
 #include "../headers/Client.hpp"
 
 // Constructor
-Client::Client(): _clientfd(0), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {};
-Client::Client( int fd ): _clientfd(fd), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {};
+Client::Client(): _clientfd(0), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
+Client::Client( int fd ): _clientfd(fd), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
 
 // Copy Constructor
-Client::Client( const Client& x ): _Host(x._Host) { *this = x; };
+Client::Client( const Client& x ): _Host(x._Host) { *this = x; }
 
 // Assignment operator
 Client & Client::operator=( const Client& rhs ) {
@@ -32,15 +32,16 @@ Client & Client::operator=( const Client& rhs ) {
 Client::~Client() {};
 
 // Getters
-std::string	Client::getUserName() const { return (this->_UserName); };
-std::string	Client::getNickName() const { return (this->_NickName); };
-std::string	Client::getFullName() const { return (this->_FullName); };
-std::string Client::getHost() const { return (this->_Host); };
+std::string	Client::getUserName() const { return (this->_UserName); }
+std::string	Client::getNickName() const { return (this->_NickName); }
+std::string	Client::getFullName() const { return (this->_FullName); }
+std::string Client::getHost() const { return (this->_Host); }
 std::string Client::getID()	const { return (this->_ID); }
-bool Client::getAuth() const { return (this->_Auth); };
-int	Client::getClientfd() const { return (this->_clientfd); };
-int	Client::getRegistered() const { return (this->_Registered); };
-int	Client::getisOperator() const { return (this->_isOperator); };
+bool Client::getAuth() const { return (this->_Auth); }
+int	Client::getClientfd() const { return (this->_clientfd); }
+int	Client::getRegistered() const { return (this->_Registered); }
+int	Client::getisOperator() const { return (this->_isOperator); }
+
 int	Client::getMode(char mode) const {
 	if (mode == 'a')
 		return this->_modes.away;
@@ -60,13 +61,14 @@ int	Client::getMode(char mode) const {
 }
 
 // Setters
-void Client::setUserName(std::string UserName) { this->_UserName = UserName; };
-void Client::setNickName( std::string NickName ) { this->_NickName = NickName; };
-void Client::setFullName( std::string FullName ) { this->_FullName = FullName; };
-void Client::setID( std::string ID ) { this->_ID = ID; };
-void Client::setClientfd( int Clientfd ) { this->_clientfd = Clientfd; };
-void Client::setRegistered( int Registered ) { this->_Registered = Registered; };
-void Client::setAuth( int Auth ) { this->_Auth = Auth; };
+void Client::setUserName(std::string UserName) { this->_UserName = UserName; }
+void Client::setNickName( std::string NickName ) { this->_NickName = NickName; }
+void Client::setFullName( std::string FullName ) { this->_FullName = FullName; }
+void Client::setID( std::string ID ) { this->_ID = ID; }
+void Client::setClientfd( int Clientfd ) { this->_clientfd = Clientfd; }
+void Client::setRegistered( int Registered ) { this->_Registered = Registered; }
+void Client::setAuth( int Auth ) { this->_Auth = Auth; }
+
 void Client::setIsOperator(int isOperator) {
 	this->_isOperator = isOperator;
 	this->_modes.op = isOperator;
