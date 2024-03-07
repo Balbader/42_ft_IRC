@@ -113,6 +113,7 @@ std::string Server::_channelInfo(std::string ChannelName, int i) {
 }
 
 std::string	Server::_listAllChannels() const {
+
 	std::string channels(YELLOW "███████████████████████████████████████████████████████████████████████████████████████\n");
 
 	channels.append("█              █              █                    █                                  █\n");
