@@ -1,6 +1,5 @@
 #include "../headers/Server.hpp"
 
-
 std::string	Server::_getBotMessage() {
 	std::string Greeting = BLUE;
 	Greeting.append("\n\n\n\n\n\n\n██████████████████████████████████████████████████████████████████████████████████\n");
