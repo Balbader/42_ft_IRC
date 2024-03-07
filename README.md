@@ -1,4 +1,4 @@
-# 🤔 Description
+# Description
 This project is about creating our own IRC server. We used an actual IRC client to connect to our server and test it.
 **IRC** (Internet Relay Chat) is a protocol for real-time text messaging between internet-connected computers created in **1988**. It is mainly used for group discussion in chat rooms called “**channels**” although it supports private messages between two users, data transfer, and various client-side commands.
 
@@ -13,12 +13,12 @@ This project is about creating our own IRC server. We used an actual IRC client 
     -  All the messages sent from one client to a channel have to be forwarded to every other client that joined the channel.
     -  We must have operators and regular users.
     -  Then, we have to implement the commands that are specific to operators.
+
 ## Bonus part 
 Here are the extra features we added to our IRC server so it looks even more like and actual IRC server:
-  - Handle file transfer.
   - A meme bot named **DEEZNUTS**.
 
-# 🔑 Our IRC Commands
+# Our IRC Commands
 These are the available commands in our IRC Server:
   - **PASS**: The **PASS** command is used to set a 'connection password'.
   - **NICK**: NICK command is used to give user a nickname or change the existing one.
@@ -36,7 +36,7 @@ These are the available commands in our IRC Server:
   - **GETFILE**: The GETFILE command is used to receive a file from another user.
   - **DEEZNUTS**: The DEEZNUTS command is a bot that helps you with various types of information about the server.
 
-# ⚙️ Start IRC Server
+# Start IRC Server
 To compile the program, use:
   - `make`
 To start the Server, use:
@@ -49,7 +49,7 @@ To connect to the server, you can use:
     - **PORT**: The PORT that the server listening on.
   - You can also use an IRC Client e.g LimeChat, WeeChat...
 
-# 👨‍💻 Ressources
+# Ressources
 * [What is a Socket?](https://www.tutorialspoint.com/unix_sockets/what_is_socket.htm)
 * [Unix Socket - Network Addresses](https://www.tutorialspoint.com/unix_sockets/network_addresses.htm)
 * [Unix Socket - Core Functions](https://www.tutorialspoint.com/unix_sockets/socket_core_functions.htm)
