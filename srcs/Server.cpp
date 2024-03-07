@@ -21,17 +21,13 @@ Server::~Server() {
 	if (this->_pfds)
 		delete [] this->_pfds;
 
-	std::map<int, Client *>::iterator it = this->_clients.begin();
-	while (it != this->_clients.end()) {
+	for (std::map<int, Client*>::iterator it = this->_clients.begin(); it != _clients.end(); ++it) {
 		delete it->second;
-		it++;
 	}
 	this->_clients.clear();
 
-	std::map<std::string, Channel *>::iterator itC = this->_allChannels.begin();
-	while (itC != this->_allChannels.end()) {
+	for (std::map<std::string, Channel*>::iterator itC = this->_allChannels.begin(); itC != _allChannels.end(); ++itC) {
 		delete itC->second;
-		itC++;
 	}
 	this->_allChannels.clear();
 }
