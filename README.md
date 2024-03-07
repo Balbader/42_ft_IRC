@@ -49,21 +49,6 @@ To connect to the server, you can use:
     - **PORT**: The PORT that the server listening on.
   - You can also use an IRC Client e.g LimeChat, WeeChat...
 
-# 💪 Contributers
-
-[BARI Mehdi](https://github.com/barimehdi77)<br/>
-&emsp;42intra profile : [mbari](https://profile.intra.42.fr/users/mbari) <br/>
-<br/>
-[SFAIHI Abderrahmane](https://github.com/AbderrSfa)
-<br/>
-&emsp;42intra profile : [asfaihi](https://profile.intra.42.fr/users/asfaihi)
-<br/>
-<br/>
-[EL KEMMAL Abdelhamid](https://github.com/abdel-ke)
-<br/>
-&emsp;42intra profile : [abdel-ke](https://profile.intra.42.fr/users/abdel-ke)
-
-
 # 👨‍💻 Ressources
 * [What is a Socket?](https://www.tutorialspoint.com/unix_sockets/what_is_socket.htm)
 * [Unix Socket - Network Addresses](https://www.tutorialspoint.com/unix_sockets/network_addresses.htm)
