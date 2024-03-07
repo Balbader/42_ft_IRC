@@ -164,6 +164,7 @@ std::string	Server::_setMode(Request request, int i)
 		std::string	ret;
 		if (request.args.size() == 1 && request.args[0] == this->_clients[i]->getNickName())
 			ret = _printUserModes(ret, i);
+
         std::stringstream ss;
         ss << 461;
         std::string tmp = ss.str();
