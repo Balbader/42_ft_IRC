@@ -1,6 +1,5 @@
 #pragma once
 
-/*  This class is temporarily		*/
 #include <iostream>
 #include <string>
 #include <vector>
