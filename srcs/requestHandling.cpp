@@ -1,7 +1,6 @@
 #include "../headers/Server.hpp"
 
-void	Server::_ClientRequest(int i)
-{
+void Server::_ClientRequest(int i) {
 	char buf[6000];
 	int sender_fd = this->_pfds[i].fd;
 	int nbytes = recv(sender_fd, buf, sizeof(buf), 0);
@@ -16,6 +15,7 @@ void	Server::_ClientRequest(int i)
 		close(sender_fd);
 		_removeFromPoll(i);
 	}
+
 	else
 	{
 		std::string message(buf, strlen(buf) - 1);
@@ -26,7 +26,7 @@ void	Server::_ClientRequest(int i)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
 	}
 	memset(&buf, 0, 6000);
-};
+}
 
 Request	Server::_splitRequest(std::string req)
 {
@@ -38,29 +38,33 @@ Request	Server::_splitRequest(std::string req)
 		request.invalidMessage = true;
 		return (request);
 	}
+
 	j = i;
-	while (req[i])
-	{
-		if (req[i] == ' ')
-		{
+	while (req[i]) {
+		if (req[i] == ' ') {
 			if (req[i + 1] == ' ') {
 				request.invalidMessage = true;
 				return (request);
 			}
+
 			request.args.push_back(req.substr(j, i - j));
+
 			while (req[i] == ' ')
 				i++;
+
 			j = i;
 		}
-		if (req[i] == ':')
-		{
+
+		if (req[i] == ':') {
 			if (req[i - 1] != ' ') {
 				request.invalidMessage = true;
 				return (request);
 			}
+
 			request.args.push_back(req.substr(i + 1, req.length() - i));
 			request.command = request.args[0];
 			request.args.erase(request.args.begin());
+
 			return (request);
 		}
 		i++;
@@ -68,8 +72,9 @@ Request	Server::_splitRequest(std::string req)
 
 	if (i && req[j])
 		request.args.push_back(req.substr(j, i - j));
+
 	request.command = request.args[0];
 	request.args.erase(request.args.begin());
-	return (request);
-};
 
+	return (request);
+}
