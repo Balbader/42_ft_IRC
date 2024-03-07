@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   requestHandling.cpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbari <mbari@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/18 23:52:05 by mbari             #+#    #+#             */
-/*   Updated: 2022/05/17 15:26:09 by mbari            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/Server.hpp"
 
 void	Server::_ClientRequest(int i)
@@ -31,7 +19,7 @@ void	Server::_ClientRequest(int i)
 	else
 	{
 		std::string message(buf, strlen(buf) - 1);
-		if (message.back() == '\r')
+		if (message[message.size() - 1] == '\r')
 			message.erase(message.end() - 1);
 		std::string ret = _parsing(message, this->_pfds[i].fd);
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)

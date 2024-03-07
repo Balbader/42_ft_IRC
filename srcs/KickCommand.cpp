@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   KickCommand.cpp                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 19:30:40 by mbari             #+#    #+#             */
-/*   Updated: 2022/05/16 15:02:18 by asfaihi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/Server.hpp"
 
 std::string		Server::_kickedFromChannel(std::string ChannelName, std::string message, std::vector<std::string> users, int i)

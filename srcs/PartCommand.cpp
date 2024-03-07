@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   PartCommand.cpp                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 17:22:28 by mbari             #+#    #+#             */
-/*   Updated: 2022/05/16 15:02:29 by asfaihi          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/Server.hpp"
 
 int	Server::_partChannel( std::string ChannelName, int i, std::string message, int isPart )
