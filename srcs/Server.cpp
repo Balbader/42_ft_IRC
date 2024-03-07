@@ -1,6 +1,4 @@
 #include "../headers/Server.hpp"
-#include <cstdlib>
-
 
 Server::Server() : _name(), _password(), _socketfd(0), _clients(), _pfds(NULL), _online_c(0), _max_online_c(0), _prefix(":"), _allChannels(), _unavailableUserName(), _clientNicknames() {};
 
