@@ -1,6 +1,4 @@
-#ifndef __CHANNEL_HPP
-#define __CHANNEL_HPP
-
+#pragma once
 #define	USERALREADYJOINED 0
 #define USERISJOINED 1
 #define NOTINCHANNEL 2
@@ -14,25 +12,21 @@
 #define USERNOTINCHANNEL -1
 #define USERNOTFOUND -1
 
-
-
 #include "Server.hpp"
 
-class Channel
-{
+class Channel {
 	private:
-		char							_prefix;
-		Client*							_creator;
-		int								_onlineUsers;
-		std::string						_name;
-		std::string						_key;
-		std::string						_topic;
-		std::map<int, Client *>			_members;
-		std::map<int, Client *>			_operators;
-		std::map<int, Client *>			_voice;
-		std::vector<std::string>		_banned;
+		char _prefix;
+		Client* _creator;
+		int _onlineUsers;
+		std::string	_name;
+		std::string	_key;
+		std::string	_topic;
+		std::map<int, Client *>	_members;
+		std::map<int, Client *>	_operators;
+		std::map<int, Client *>	_voice;
+		std::vector<std::string> _banned;
 
-	private:
 		Channel();
 
 	public:
@@ -42,40 +36,36 @@ class Channel
 		Channel &operator=( const Channel& rhs );
 		~Channel();
 
-	public: /*             Getters                         */
-		char							const &getPrefix()		const;
-		int								const &getOnlineUsers()	const;
-		std::string						const &getName() 		const;
-		std::string						const &getKey()			const;
-		std::string						const &getTopic()		const;
-		std::map<int, Client *>			const &getMembers()		const;
-		std::map<int, Client *>			const &getOperators()	const;
-		std::map<int, Client *>			const &getVoice()		const;
-		std::map<std::string, Client *>	const &getBanned()		const;
+        // Getters
+		char const &getPrefix()	const;
+		int const &getOnlineUsers()	const;
+		std::string	const &getName() const;
+		std::string	const &getKey() const;
+		std::string	const &getTopic() const;
+		std::map<int, Client *> const &getMembers() const;
+		std::map<int, Client *> const &getOperators() const;
+		std::map<int, Client *> const &getVoice() const;
+		std::map<std::string, Client *>	const &getBanned() const;
 
-		Client*						getCreator() const;
-		std::map<int, Client *>		getAllUsers() const;
-		std::pair<Client *, int>	findUserRole( int i );
-		std::string					listAllUsers() const;
+		Client*	getCreator() const;
+		std::map<int, Client *>	getAllUsers() const;
+		std::pair<Client *, int> findUserRole( int i );
+		std::string	listAllUsers() const;
 
+        // Methods
+		int	addMember( Client *member );
+		int	addOperator( Client *member );
+		void addVoice( Client *member );
+		int	banUser( Client *member );
+		void removeOperator( int i );
+		void removeVoice( int i );
+		void removeBanned( std::string NickName );
+		void removeMember( int i );
 
-	public: /*             Modefiers functions                         */
-		int		addMember( Client *member );
-		int		addOperator( Client *member );
-		void	addVoice( Client *member );
-		int		banUser( Client *member );
-		void	removeOperator( int i );
-		void	removeVoice( int i );
-		void	removeBanned( std::string NickName );
-		void	removeMember( int i );
-
-
-	public: /*             Setters                         */
-		void	setPrefix(char prefix);
-		void	setOnlineUsers(int online);
-		void	setName(std::string name);
-		void	setKey(std::string key);
-		void	setTopic(std::string topic);
+        // Setters
+		void setPrefix(char prefix);
+		void setOnlineUsers(int online);
+		void setName(std::string name);
+		void setKey(std::string key);
+		void setTopic(std::string topic);
 };
-
-#endif
