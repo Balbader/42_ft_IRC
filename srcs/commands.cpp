@@ -65,7 +65,7 @@ std::string	Server::_notice(Request request, int i)
 	return ("");
 };
 
-int		Server::_findFdByNickName(std::string NickName)
+int Server::_findFdByNickName(std::string NickName)
 {
 	std::map<int, Client *>::iterator it = this->_clients.begin();
 	while(it != this->_clients.end())
@@ -108,7 +108,7 @@ std::string	Server::_topic(Request request, int i)
 	return ("");
 }
 
-bool		Server::_validMode(Request request) {
+bool Server::_validMode(Request request) {
 	char	c = request.args[1][1];
 	if (request.args[1].length() != 2 || (request.args[1][0] != '-' && request.args[1][0] != '+'))
 		return false;
