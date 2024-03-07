@@ -60,7 +60,6 @@ To connect to the server, you can use:
 * [Internet Relay Chat: Channel Management](https://datatracker.ietf.org/doc/html/rfc2811)
 * [Internet Relay Chat: Client Protocol](https://datatracker.ietf.org/doc/html/rfc2812)
 * [Internet Relay Chat: Server Protocol](https://datatracker.ietf.org/doc/html/rfc2813)
-
 ---
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/barimehdi77)
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K45UOA7)
