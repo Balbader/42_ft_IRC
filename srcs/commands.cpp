@@ -32,10 +32,6 @@ std::string	Server::_parsing(std::string message, int i)
 		return (_part(request, i));
 	else if (request.command == "QUIT")
 		return (_quit(request, i));
-	else if (request.command == "SENDFILE")
-		return (_sendFile(request, i));
-	else if (request.command == "GETFILE")
-		return (_getFile(request, i));
 	else if (request.command == "DEEZNUTS")
 		return (_DeezNuts( request, i));
 	else
