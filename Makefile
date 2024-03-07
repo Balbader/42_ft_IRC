@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mbari <mbari@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/05 14:21:19 by asfaihi           #+#    #+#              #
-#    Updated: 2022/05/17 15:22:28 by mbari            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Name of the final executable files
 NAME = ./ircserv
 
@@ -68,11 +56,11 @@ MAKE = make -C
 ECHO = /bin/echo
 ERRIGNORE = 2>/dev/null
 
-all: credit $(NAME)
-	@echo "$(BLUE)██████████████████████ Compiling is DONE ███████████████████████$(RESET)"
+all: $(NAME)
+	@echo "$(BLUE)Compiling is DONE $(RESET)"
 
 head:
-	@echo "$(BLUE)█████████████████████ Making ft_irc Server █████████████████████$(RESET)"
+	@echo "$(BLUE)Making ft_irc Server $(RESET)"
 
 # Phonebook making rules
 $(NAME): head $(OBJS) $(MAIN_OBJ) $(HEADERS_FILES)
@@ -80,14 +68,14 @@ $(NAME): head $(OBJS) $(MAIN_OBJ) $(HEADERS_FILES)
 
 $(OBJECTSDIR)/%.o: $(SRCS_FOLDER)/%.cpp $(HEADERS_FILES)
 	@$(MKDIR) $(dir $@)
-	@printf "$(BLUE)█ $(YELLOW)Compiling$(RESET) $<:\r\t\t\t\t\t\t\t..."
+	@printf "$(YELLOW)Compiling$(RESET) $<:\r\t\t\t\t\t\t\t..."
 	@$(CC) $(CPP_STANDARD) $(FLAGS) -o $@ -c $< -g
-	@echo "\r\t\t\t\t\t\t\t$(GREEN){DONE}$(BLUE) █$(RESET)"
+	@echo "\r\t\t\t\t\t\t\t$(GREEN){DONE}$(RESET)"
 
 $(OBJECTSDIR)/%.o: main.cpp $(HEADERS_FILES)
-	@printf "$(BLUE)█ $(YELLOW)Compiling$(RESET) $<:\r\t\t\t\t\t\t\t..."
+	@printf "$(YELLOW)Compiling$(RESET) $<:\r\t\t\t\t\t\t\t..."
 	@$(CC) $(CPP_STANDARD) $(FLAGS) -o $@ -c $< -g
-	@echo "\r\t\t\t\t\t\t\t$(GREEN){DONE}$(BLUE) █$(RESET)"
+	@echo "\r\t\t\t\t\t\t\t$(GREEN){DONE}$(RESET)"
 
 # Remove all objects, dependencies and executable files generated during the build
 clean:
@@ -100,14 +88,3 @@ fclean: clean
 	@$(RM) $(NAME) $(ERRIGNORE)
 
 re: fclean all
-
-# Print Credit
-credit:
-	@echo " ┏━━━┓┏━━━━┓    ┏━━┓┏━━━┓┏━━━┓"
-	@echo " ┃┏━━┛┃┏┓┏┓┃    ┗┫┣┛┃┏━┓┃┃┏━┓┃"
-	@echo " ┃┗━━┓┗┛┃┃┗┛     ┃┃ ┃┗━┛┃┃┃ ┗┛"
-	@echo " ┃┏━━┛  ┃┃       ┃┃ ┃┏┓┏┛┃┃ ┏┓"
-	@echo " ┃┃    ┏┛┗┓┏━━━┓┏┫┣┓┃┃┃┗┓┃┗━┛┃"
-	@echo " ┗┛    ┗━━┛┗━━━┛┗━━┛┗┛┗━┛┗━━━┛"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
