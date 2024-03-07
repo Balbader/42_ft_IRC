@@ -119,13 +119,40 @@ bool Server::_validMode(Request request) {
 
 std::string	Server::_printUserModes(std::string ret, int i)
 {
-	ret.append("a: " + std::to_string(this->_clients[i]->getMode('a')));
-	ret.append("\ni: " + std::to_string(this->_clients[i]->getMode('i')));
-	ret.append("\nw: " + std::to_string(this->_clients[i]->getMode('w')));
-	ret.append("\nr: " + std::to_string(this->_clients[i]->getMode('r')));
-	ret.append("\no: " + std::to_string(this->_clients[i]->getMode('o')));
-	ret.append("\nO: " + std::to_string(this->_clients[i]->getMode('O')));
-	ret.append("\ns: " + std::to_string(this->_clients[i]->getMode('s')) + "\n");
+    std::stringstream ss_a;
+    ss_a << this->_clients[i]->getMode('a');
+    std::string tmp_a = ss_a.str();
+	ret.append("a: " + tmp_a);
+
+    std::stringstream ss_i;
+    ss_i << this->_clients[i]->getMode('i');
+    std::string tmp_i = ss_i.str();
+	ret.append("\ni: " + tmp_i);
+
+    std::stringstream ss_w;
+    ss_w << this->_clients[i]->getMode('w');
+    std::string tmp_w = ss_w.str();
+	ret.append("\nw: " + tmp_w);
+
+    std::stringstream ss_r;
+    ss_r << this->_clients[i]->getMode('r');
+    std::string tmp_r = ss_r.str();
+	ret.append("\nr: " + tmp_r);
+
+    std::stringstream ss_o;
+    ss_o << this->_clients[i]->getMode('o');
+    std::string tmp_o = ss_o.str();
+	ret.append("\no: " + tmp_o);
+
+    std::stringstream ss_O;
+    ss_O << this->_clients[i]->getMode('O');
+    std::string tmp_O = ss_O.str();
+	ret.append("\nO: " + tmp_O);
+
+    std::stringstream ss_s;
+    ss_s << this->_clients[i]->getMode('s');
+    std::string tmp_s = ss_s.str();
+	ret.append("\ns: " + tmp_s + "\n");
 	return ret;
 }
 
@@ -137,7 +164,10 @@ std::string	Server::_setMode(Request request, int i)
 		std::string	ret;
 		if (request.args.size() == 1 && request.args[0] == this->_clients[i]->getNickName())
 			ret = _printUserModes(ret, i);
-		ret.append(std::to_string(461) + "ERR_NEEDMOREPARAMS\n\tPASS :Not enough parameters\n");
+        std::stringstream ss;
+        ss << 461;
+        std::string tmp = ss.str();
+		ret.append(tmp + "ERR_NEEDMOREPARAMS\n\tPASS :Not enough parameters\n");
 		return (ret);
 	}
 	if (request.args[0] != this->_clients[i]->getNickName())
