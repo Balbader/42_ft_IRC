@@ -39,41 +39,55 @@ void Server::_ClientRequest(int i) {
 	memset(&buf, 0, 6000);
 }
 
+// Parse a raw request string from a client and organize the data into a structured 'Request' object.
 Request	Server::_splitRequest(std::string req)
 {
+	// init request
 	Request	request;
 	size_t	i = 0;
 	size_t	j = 0;
 
+	// check if first char is ' ' || null
 	if (req[i] == ' ' || !req[i]) {
 		request.invalidMessage = true;
 		return (request);
 	}
 
+	// parse
 	j = i;
 	while (req[i]) {
+		// When a ' ' is encountered, means end of a command or argument
 		if (req[i] == ' ') {
 			if (req[i + 1] == ' ') {
 				request.invalidMessage = true;
 				return (request);
 			}
 
+			// extract substring and add to 'args' vector
 			request.args.push_back(req.substr(j, i - j));
 
+			// skip additional ' '
 			while (req[i] == ' ')
 				i++;
 
 			j = i;
 		}
 
+		// When a ':' is encountered, means end of a command or argument
 		if (req[i] == ':') {
+			// check if last char is ' '
 			if (req[i - 1] != ' ') {
 				request.invalidMessage = true;
 				return (request);
 			}
 
+			// extract substring from the char afer the ':' and add to 'args' vector
 			request.args.push_back(req.substr(i + 1, req.length() - i));
+
+			// set command field of the request object to the first argument
 			request.command = request.args[0];
+
+			// remove the argument from 'args' vector
 			request.args.erase(request.args.begin());
 
 			return (request);
@@ -81,10 +95,14 @@ Request	Server::_splitRequest(std::string req)
 		i++;
 	}
 
+	// in case no ':' -> check if there is a remaining argument to add to 'args'
 	if (i && req[j])
 		request.args.push_back(req.substr(j, i - j));
 
+	// set command field of the request object to the first argument
 	request.command = request.args[0];
+
+	// remove the argument from 'args' vector
 	request.args.erase(request.args.begin());
 
 	return (request);
