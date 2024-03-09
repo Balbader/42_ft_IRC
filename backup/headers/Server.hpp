@@ -64,6 +64,8 @@ private:
 	std::string	_kick(Request request, int i);
 	std::string	_sendMessage(std::string message, int i);
 	std::string	_printMessage(std::string num, std::string nickname, std::string message);
+
+	// commands.cpp
 	std::string	_parsing(std::string message, int i);
 	Request	_splitRequest(std::string req);
 	std::string _printHelpInfo();
