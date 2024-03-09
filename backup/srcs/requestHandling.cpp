@@ -1,33 +1,41 @@
 #include "../headers/Server.hpp"
 
+// Handle reception and process of client request, managing client connections
 void Server::_ClientRequest(int i) {
+
 	// buffer to store received data
 	char buf[6000];
 
+	// id the sender file descriptor
 	int sender_fd = this->_pfds[i].fd;
+
+	// store the number of bytes received
 	int nbytes = recv(sender_fd, buf, sizeof(buf), 0);
 
-	if (nbytes <= 0)
-	{
-		if (nbytes == 0)
+	if (nbytes <= 0) { // check for error or disconnection
+		if (nbytes == 0) // client has closed the connection
 			std::cout << "[" << currentDateTime() << "]: socket " << sender_fd << " hung up" << std::endl;
-		else
+		else // < 0 = error detected
 			std::cout << "recv() error: " << strerror(errno) << std::endl;
 
+		// close the client's socket and remove the client from the poll
 		close(sender_fd);
 		_removeFromPoll(i);
 	}
 
-	else
-	{
+	else {
 		std::string message(buf, strlen(buf) - 1);
+
 		if (message[message.size() - 1] == '\r')
 			message.erase(message.end() - 1);
 
+		// parse the client's request
 		std::string ret = _parsing(message, this->_pfds[i].fd);
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
 	}
+
+	// clear & reset buffer for next request
 	memset(&buf, 0, 6000);
 }
 
