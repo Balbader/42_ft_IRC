@@ -177,7 +177,7 @@ std::string	Server::_printUserModes(std::string ret, int i) {
 }
 */
 
-// append user mode to a string and return it
+// append user mode to a string and returns it
 std::string Server::_printUserModes(std::string ret, int i) {
     char modes[] = {'a', 'i', 'w', 'r', 'o', 'O', 's'};
     std::stringstream ss;
@@ -187,8 +187,10 @@ std::string Server::_printUserModes(std::string ret, int i) {
     }
 
     ret.append(ss.str());
+	// BUG: in case the client's mode is 's', need to append "\n"
     return ret;
 }
+
 
 std::string	Server::_setMode(Request request, int i) {
 	if (!this->_clients[i]->getRegistered())
