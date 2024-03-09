@@ -2,83 +2,96 @@
 
 std::string	Server::_parsing(std::string message, int i) {
 
+	// Initiate a 'request' object which parses the input message
 	Request	request(_splitRequest(message));
 
 	if (request.invalidMessage)
 		return ("Invalid message!\n");
 
 	if (request.command == "PASS")
-		return (_setPassWord(request, i));
+		return (_setPassWord(request, i)); // sets the password for a session or connection
 	else if (request.command == "NICK")
-		return (_setNickName(request, i));
+		return (_setNickName(request, i)); // sets or change client nickname
 	else if (request.command == "USER")
-		return (_setUserName(request, i));
+		return (_setUserName(request, i)); // sets username
 	else if (request.command == "OPER")
-		return (_setOper(request, i));
+		return (_setOper(request, i)); // grant operator privileges to a user
 	else if (request.command == "MODE")
-		return (_setMode(request, i));
+		return (_setMode(request, i)); // set a mode for user or channel
 	else if (request.command == "PRIVMSG")
-		return (_privmsg(request, i));
+		return (_privmsg(request, i)); // send private message to user or channel
 	else if (request.command == "NOTICE")
-		return (_notice(request, i));
+		return (_notice(request, i)); // sends notice to a user or a channel
 	else if (request.command == "HELP")
-		return (_printHelpInfo());
+		return (_printHelpInfo()); // display help info
 	else if (request.command == "JOIN")
-		return (_joinChannel(request, i));
+		return (_joinChannel(request, i)); // Joins a channel
 	else if (request.command == "TOPIC")
-		return (_topic(request, i));
+		return (_topic(request, i)); // Sets or gets the topic of a channel
 	else if (request.command == "KICK")
-		return (_kick(request, i));
+		return (_kick(request, i)); // Removes a user from a channel
 	else if (request.command == "PART")
-		return (_part(request, i));
+		return (_part(request, i)); // Leaves a channel
 	else if (request.command == "QUIT")
-		return (_quit(request, i));
-	else if (request.command == "DEEZNUTS")
-		return (_DeezNuts( request, i));
+		return (_quit(request, i)); // Disconnects from the server
 	else
 		return ("Invalid command\n");
 }
 
+// Handles the NOTICE command used to send a message to a specific user or channel
+// similar to PRIVMSG but should not generate any automatic reply
 std::string	Server::_notice(Request request, int i) {
+
+	// check if client is registered
 	if (!this->_clients[i]->getRegistered())
 		return (_printMessage("451", this->_clients[i]->getNickName(), ":You have not registered"));
 
+	// check args count
 	if (request.args.size() < 2)
 		return (_printMessage("461", this->_clients[i]->getNickName(), ":Not enough parameters"));
 
+	// if all good -> send message
 	if (request.args.size() == 2)
 		_privToUser(request.args[0], request.args[1], "NOTICE", i);
 
+	// return empty string: indicates there is no immediate server message to be
+	// sent back to the client who issued the NOTICE command.
 	return ("");
 }
 
+// find the file descriptor associated with the client based on client nickname
 int Server::_findFdByNickName(std::string NickName) {
-	std::map<int, Client *>::iterator it = this->_clients.begin();
 
-	while(it != this->_clients.end()) {
+	for (std::map<int, Client*>::iterator it = this->_clients.begin(); it != this->_clients.end(); ++it) {
 		if (it->second->getNickName() == NickName)
 			return (it->second->getClientfd());
-		it++;
 	}
 
 	return (USERNOTINCHANNEL);
 }
 
+// set or view the topic of a channel
 std::string	Server::_topic(Request request, int i) {
+
+	// check if client is registered
 	if (!this->_clients[i]->getRegistered())
 		return (_printMessage("451", this->_clients[i]->getNickName(), ":You have not registered"));
 
+	// check args count
 	if (request.args.size() == 0)
 		return (_printMessage("461", this->_clients[i]->getNickName(), ":Not enough parameters"));
 
-	if (request.args.size() == 1) {
-		if (this->_allChannels.find(request.args[0])->second->getTopic().empty())
+	if (request.args.size() == 1) { // 1 argument -> assumes the client wants to view the topic of the specific channel
+
+		if (this->_allChannels.find(request.args[0])->second->getTopic().empty()) // if no topic is set
 			return (_printMessage("331", this->_clients[i]->getNickName(), request.args[0] + " :No topic is set"));
-		else
+
+		else // if a topic is set
 			return (_printMessage("332", this->_clients[i]->getNickName(), request.args[0] + " :" + this->_allChannels.find(request.args[0])->second->getTopic()));
 	}
 
-	std::map<std::string, Channel *>::iterator it = this->_allChannels.find(request.args[0]);
+	// if there are 2 arguments
+	std::map<std::string, Channel*>::iterator it = this->_allChannels.find(request.args[0]);
 
 	if (it != this->_allChannels.end()) {
 		std::pair<Client *, int> user = it->second->findUserRole(i);
@@ -107,6 +120,7 @@ bool Server::_validMode(Request request) {
 }
 
 std::string	Server::_printUserModes(std::string ret, int i) {
+
     std::stringstream ss_a;
     ss_a << this->_clients[i]->getMode('a');
     std::string tmp_a = ss_a.str();
