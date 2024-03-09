@@ -38,6 +38,7 @@ std::string	Server::_parsing(std::string message, int i) {
 		return ("Invalid command\n");
 }
 
+
 // Handles the NOTICE command used to send a message to a specific user or channel
 // similar to PRIVMSG but should not generate any automatic reply
 std::string	Server::_notice(Request request, int i) {
@@ -59,6 +60,7 @@ std::string	Server::_notice(Request request, int i) {
 	return ("");
 }
 
+
 // find the file descriptor associated with the client based on client nickname
 int Server::_findFdByNickName(std::string NickName) {
 
@@ -69,6 +71,7 @@ int Server::_findFdByNickName(std::string NickName) {
 
 	return (USERNOTINCHANNEL);
 }
+
 
 // set or view the topic of a channel
 std::string	Server::_topic(Request request, int i) {
@@ -117,6 +120,7 @@ std::string	Server::_topic(Request request, int i) {
 	// indicates there is no specific error or status message to return to the client
 	return ("");
 }
+
 
 // Validate the mode string provided in client's request
 bool Server::_validMode(Request request) {
@@ -191,6 +195,7 @@ std::string Server::_printUserModes(std::string ret, int i) {
     return ret;
 }
 
+
 // Process a mode change request and updates the client's mode if request is valid
 std::string	Server::_setMode(Request request, int i) {
 
@@ -232,6 +237,8 @@ std::string	Server::_setMode(Request request, int i) {
 	return (_printMessage("221", this->_clients[i]->getNickName(), request.args[1]));
 }
 
+
+// Grant operator status to a client
 std::string	Server::_setOper(Request request, int i) {
 	if (!this->_clients[i]->getRegistered())
 		return (_printMessage("451", this->_clients[i]->getNickName(), ":You have not registered"));
@@ -242,21 +249,21 @@ std::string	Server::_setOper(Request request, int i) {
 	if (request.args[0] != "ADMIN")
 		return (_printMessage("464", this->_clients[i]->getNickName(), ":Username/Password incorrect"));
 
-	// if (request.args[1] != "DEEZNUTS")
-	// 	return (_printMessage("464", this->_clients[i]->getNickName(), ":Username/Password incorrect"));
-
 	this->_clients[i]->setIsOperator(true);
 	return (_printMessage("381", this->_clients[i]->getNickName(), ":You are now an IRC operator"));
 }
 
+
+// handle password setting or Validation Process for a client trying to
+// register or authenticate with the server
 std::string	Server::_setPassWord(Request request, int i) {
-	if (request.args.size() < 1)
+	if (request.args.size() < 1) // check if at least one argument is provided
 		return (_printMessage("461", this->_clients[i]->getNickName(), "PASS :Not enough parameters"));
 
 	if (this->_clients[i]->getRegistered())
 		return (_printMessage("462", this->_clients[i]->getNickName(), ":Unauthorized command (already registered)"));
 
-	if (request.args[0] != this->_password)
+	if (request.args[0] != this->_password) // check password match
 		return (_printMessage("997", this->_clients[i]->getNickName(), ":Incorrect password"));
 	else
 		this->_clients[i]->setAuth(true);
@@ -264,13 +271,19 @@ std::string	Server::_setPassWord(Request request, int i) {
 	return ("");
 }
 
+
+// Setting or changing clients's nickname on server
+// ensures that nipcknames are unique, valid and set only after authentication
 std::string	Server::_setNickName(Request request, int i) {
+	// check client authentication
 	if (!this->_clients[i]->getAuth())
 		return (_printMessage("998", this->_clients[i]->getNickName(), ":You need to authenticate first"));
 
+	// checks if at least one argument is provided
 	if (request.args.size() < 1)
 		return (_printMessage("431", this->_clients[i]->getNickName(), ":No nickname given"));
 
+	// check if nickname is valid
 	int	j = 0;
 	while (request.args[0][j]) {
 		if (!isalnum(request.args[0][j]) && request.args[0][j] != '-' && request.args[0][j] != '\r')
@@ -278,21 +291,34 @@ std::string	Server::_setNickName(Request request, int i) {
 		j++;
 	}
 
+	// check if nickname already in use
 	if (std::find(this->_clientNicknames.begin(), this->_clientNicknames.end(), request.args[0]) != this->_clientNicknames.end())
 		return (_printMessage("433", this->_clients[i]->getNickName(), request.args[0] + " :Nickname is already in use"));
 
+	// set new nickname
 	this->_clients[i]->setNickName(request.args[0]);
+
+	// add new nickname
 	this->_clientNicknames.push_back(this->_clients[i]->getNickName());
 
-	if (this->_clients[i]->getUserName() != "") {
+	// Registration && ID setting
+	if (this->_clients[i]->getUserName() != "") { // if client has a username
+
+		// create new ID
 		this->_clients[i]->setID(this->_clients[i]->getNickName() + "!" + this->_clients[i]->getUserName() + "@" + this->_clients[i]->getHost());
+
+		// set client as registered
 		this->_clients[i]->setRegistered(true);
+
 		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
 	}
 
+	// if user dont have a username
 	return ("");
 }
 
+
+// 
 std::string	Server::_setUserName(Request request, int i) {
 	if (!this->_clients[i]->getAuth())
 		return (_printMessage("998", this->_clients[i]->getNickName(), ":You need to authenticate first"));
