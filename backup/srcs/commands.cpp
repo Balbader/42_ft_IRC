@@ -191,16 +191,22 @@ std::string Server::_printUserModes(std::string ret, int i) {
     return ret;
 }
 
-
+// Process a mode change request and updates the client's mode if request is valid
 std::string	Server::_setMode(Request request, int i) {
+
+	// checks if client is registered
 	if (!this->_clients[i]->getRegistered())
 		return (_printMessage("451", this->_clients[i]->getNickName(), ":You have not registered"));
 
+	// check args count
 	if (request.args.size() < 2) {
 		std::string	ret;
+
+		// if only one argument and it matches the client's nickname
 		if (request.args.size() == 1 && request.args[0] == this->_clients[i]->getNickName())
 			ret = _printUserModes(ret, i);
 
+		// if argument count incorrect
         std::stringstream ss;
         ss << 461;
         std::string tmp = ss.str();
@@ -208,17 +214,21 @@ std::string	Server::_setMode(Request request, int i) {
 		return (ret);
 	}
 
+	// check if nicknames match
 	if (request.args[0] != this->_clients[i]->getNickName())
 		return (_printMessage("502", this->_clients[i]->getNickName(), ":Cannot change mode for other users"));
 
+	// check if requested mode is valid
 	if (!_validMode(request))
 		return (_printMessage("501", this->_clients[i]->getNickName(), ":Unknown MODE flag"));
 
+	// check flag
 	if (request.args[1][0] == '+')
 		this->_clients[i]->setMode(true, request.args[1][1]);
 	else
 		this->_clients[i]->setMode(false, request.args[1][1]);
 
+	// return confirmation message with mode change that was requested
 	return (_printMessage("221", this->_clients[i]->getNickName(), request.args[1]));
 }
 
@@ -232,8 +242,8 @@ std::string	Server::_setOper(Request request, int i) {
 	if (request.args[0] != "ADMIN")
 		return (_printMessage("464", this->_clients[i]->getNickName(), ":Username/Password incorrect"));
 
-	if (request.args[1] != "DEEZNUTS")
-		return (_printMessage("464", this->_clients[i]->getNickName(), ":Username/Password incorrect"));
+	// if (request.args[1] != "DEEZNUTS")
+	// 	return (_printMessage("464", this->_clients[i]->getNickName(), ":Username/Password incorrect"));
 
 	this->_clients[i]->setIsOperator(true);
 	return (_printMessage("381", this->_clients[i]->getNickName(), ":You are now an IRC operator"));
