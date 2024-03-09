@@ -48,6 +48,7 @@ RM 					:=	rm -rf
 RMDIR 				:=	rm -rf
 MKDIR 				:= 	mkdir -p
 MAKE 				:=	make -C
+
 ECHO 				:=	/bin/echo
 ERRIGNORE			:=	2>/dev/null
 
