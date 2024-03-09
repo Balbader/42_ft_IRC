@@ -21,6 +21,7 @@ void Server::_ClientRequest(int i) {
 		std::string message(buf, strlen(buf) - 1);
 		if (message[message.size() - 1] == '\r')
 			message.erase(message.end() - 1);
+
 		std::string ret = _parsing(message, this->_pfds[i].fd);
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
