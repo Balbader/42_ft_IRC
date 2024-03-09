@@ -191,11 +191,11 @@ std::string	Client::getAllChannels() const {
 	std::map<std::string, Channel *>::const_iterator it = this->_joinedChannels.begin();
     std::stringstream ss;
     ss << it->second->getOnlineUsers();
-    std::string tmp = ss.str();
+    std::string size = ss.str();
 	while (it != this->_joinedChannels.end()) {
 		channels.append("█              █              █                    █                                  █\n");
 		channels.append("█ " RESET + fillIt(it->first, 12));
-		channels.append(YELLOW " █      " RESET + fillIt(tmp, 7));
+		channels.append(YELLOW " █      " RESET + fillIt(size, 7));
 		channels.append(YELLOW " █ " RESET + fillIt(it->second->getCreator()->getFullName(), 18));
 		channels.append(YELLOW " █ " RESET + fillIt(it->second->getTopic(), 32));
 		channels.append(YELLOW " █\n");
