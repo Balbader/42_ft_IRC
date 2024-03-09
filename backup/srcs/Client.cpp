@@ -1,13 +1,15 @@
 #include "../headers/Client.hpp"
 
-// Constructor
+// ===============================================================> Constructor
 Client::Client(): _clientfd(0), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
 Client::Client( int fd ): _clientfd(fd), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
 
-// Copy Constructor
+
+// ==========================================================> Copy Constructor
 Client::Client( const Client& x ): _Host(x._Host) { *this = x; }
 
-// Assignment operator
+
+// =======================================================> Assignment operator
 Client & Client::operator=( const Client& rhs ) {
 	if (this == &rhs)
 		return (*this);
@@ -28,10 +30,12 @@ Client & Client::operator=( const Client& rhs ) {
 	return (*this);
 }
 
-// Destructor
+
+// ================================================================> Destructor
 Client::~Client() {};
 
-// Getters
+
+// ===================================================================> Getters
 std::string	Client::getUserName() const { return (this->_UserName); }
 std::string	Client::getNickName() const { return (this->_NickName); }
 std::string	Client::getFullName() const { return (this->_FullName); }
@@ -60,14 +64,15 @@ int	Client::getMode(char mode) const {
 	return (0);
 }
 
-// Setters
+
+// ===================================================================> Setters
 void Client::setUserName(std::string UserName) { this->_UserName = UserName; }
-void Client::setNickName( std::string NickName ) { this->_NickName = NickName; }
-void Client::setFullName( std::string FullName ) { this->_FullName = FullName; }
-void Client::setID( std::string ID ) { this->_ID = ID; }
-void Client::setClientfd( int Clientfd ) { this->_clientfd = Clientfd; }
-void Client::setRegistered( int Registered ) { this->_Registered = Registered; }
-void Client::setAuth( int Auth ) { this->_Auth = Auth; }
+void Client::setNickName(std::string NickName) { this->_NickName = NickName; }
+void Client::setFullName(std::string FullName) { this->_FullName = FullName; }
+void Client::setID(std::string ID) { this->_ID = ID; }
+void Client::setClientfd(int Clientfd) { this->_clientfd = Clientfd; }
+void Client::setRegistered(int Registered) { this->_Registered = Registered; }
+void Client::setAuth(int Auth) { this->_Auth = Auth; }
 
 void Client::setIsOperator(int isOperator) {
 	this->_isOperator = isOperator;
@@ -90,42 +95,49 @@ void Client::setMode(int value, char mode) {
 		this->_modes.server = value;
 }
 
-// Methods
-int Client::isJoined( std::string ChannelName ) const {
+
+// ===================================================================> Methods
+
+// check if the client is currently joined to a channel with a specific name
+int Client::isJoined(std::string ChannelName) const {
 	if (this->_joinedChannels.find(ChannelName) != this->_joinedChannels.end())
 		return (1);
 
 	return (0);
 }
 
-void Client::joinChannel( std::string ChannelName, Channel *channel ) {
+// allow the client to join a specific channel, assuming the client is not already a member of the channel
+void Client::joinChannel(std::string ChannelName, Channel* channel) {
 	if (!isJoined(ChannelName))
-		this->_joinedChannels.insert(std::pair<std::string, Channel *>(ChannelName, channel));
+		this->_joinedChannels.insert(std::pair<std::string, Channel*>(ChannelName, channel));
 }
 
-std::string	Client::JoinedChannels() const {
-	std::string	channels;
-	std::map<std::string, Channel *>::const_iterator it = this->_joinedChannels.begin();
+// return a string of all the channels the client has joined
+std::string Client::JoinedChannels() const {
 
-	while (it != this->_joinedChannels.end()) {
+	std::string	channels;
+
+	for (std::map<std::string, Channel*>::const_iterator it = this->_joinedChannels.begin(); it != _joinedChannels.end(); ++it) {
 		channels.append(BLUE + it->first + RESET + ":\n");
 		channels.append(YELLOW "\tChannel Name: " RESET + it->first + "\n");
 		channels.append(YELLOW "\tChannel Name inside class: " RESET + it->second->getName() + "\n");
-		channels.append(YELLOW  "\tChannel Creator: " RESET + it->second->getCreator()->getFullName() + "\n");
-		it++;
+		channels.append(YELLOW "\tChannel Creator: " RESET + it->second->getCreator()->getFullName() + "\n");
 	}
 
 	return (channels);
 }
 
+// delete channel name from _joinedChannels list
 void Client::leaveChannel( std::string ChannelName ) {
 	this->_joinedChannels.erase(ChannelName);
 }
 
+// remove client from all the channels ther are currently joined in
 std::string	Client::leaveAllChannels() {
-	std::map<std::string, Channel *>::iterator it = this->_joinedChannels.begin();
 
-	while( it != this->_joinedChannels.end()) {
+	for (std::map<std::string, Channel*>::iterator it = this->_joinedChannels.begin(); it != this->_joinedChannels.end(); ++it) {
+
+		// find the client role and remove client from the channel based on that role
 		std::pair<Client *, int> user(it->second->findUserRole(this->_clientfd));
 
 		if (user.second == 0)
@@ -135,17 +147,20 @@ std::string	Client::leaveAllChannels() {
 		else
 			it->second->removeVoice(this->_clientfd);
 
+		// notify client they left the channel
 		user.first->leaveChannel(it->second->getName());
+
+		// reassigning it to first element
 		it = this->_joinedChannels.begin();
 	}
-
 	return ("");
 }
 
 std::string	Client::getUserInfo() const {
-	std::string	userInfo;
-    std::stringstream ss;
 
+	std::string	userInfo;
+
+    std::stringstream ss;
     ss << this->_joinedChannels.size();
     std::string tmp = ss.str();
 
@@ -159,18 +174,24 @@ std::string	Client::getUserInfo() const {
 	return (userInfo);
 }
 
+// Create a string representation of a table listing details of all the channels the client has joined.
+// The table includes:
+// the channel name,
+// the number of online users,
+// the creator of the channel,
+// and the channel's topic
 std::string	Client::getAllChannels() const {
+
 	std::string channels(YELLOW "███████████████████████████████████████████████████████████████████████████████████████\n");
 	channels.append("█              █              █                    █                                  █\n");
 	channels.append("█" RESET " Channel Name " YELLOW "█ " RESET "Online Users " YELLOW "█ " RESET "Creator Of Channel " YELLOW "█ " RESET "          Channel Topic          " YELLOW "█\n");
 	channels.append("█              █              █                    █                                  █\n");
 	channels.append("███████████████████████████████████████████████████████████████████████████████████████\n");
-	std::map<std::string, Channel *>::const_iterator it = this->_joinedChannels.begin();
 
+	std::map<std::string, Channel *>::const_iterator it = this->_joinedChannels.begin();
     std::stringstream ss;
     ss << it->second->getOnlineUsers();
     std::string tmp = ss.str();
-
 	while (it != this->_joinedChannels.end()) {
 		channels.append("█              █              █                    █                                  █\n");
 		channels.append("█ " RESET + fillIt(it->first, 12));
