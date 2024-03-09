@@ -53,7 +53,7 @@ void Channel::setKey(std::string key) { this->_key = key; }
 void Channel::setTopic(std::string topic) { this->_topic = topic; }
 
 // Methods
-int	Channel::addMember( Client *member ) {
+int	Channel::addMember(Client *member) {
 	if (std::find(this->_banned.begin(), this->_banned.end(), member->getNickName()) != this->_banned.end())
 		return (BANNEDFROMCHAN);
 
@@ -67,7 +67,7 @@ int	Channel::addMember( Client *member ) {
 	return (-1);
 }
 
-int	Channel::addOperator( Client *member ) {
+int	Channel::addOperator(Client *member) {
 	if (std::find(this->_banned.begin(), this->_banned.end(), member->getNickName()) != this->_banned.end())
 		return (BANNEDFROMCHAN);
 
@@ -81,7 +81,7 @@ int	Channel::addOperator( Client *member ) {
 	return (-1);
 }
 
-int	Channel::banUser( Client *member ) {
+int	Channel::banUser(Client *member) {
 	if (std::find(this->_banned.begin(), this->_banned.end(), member->getNickName()) != this->_banned.end())
 		return (BANNEDFROMCHAN);
 
@@ -90,24 +90,24 @@ int	Channel::banUser( Client *member ) {
 	return (USERISBANNED);
 }
 
-void	Channel::removeOperator( int i) {
+void Channel::removeOperator(int i) {
 	this->_operators.erase(i);
 	this->_onlineUsers--;
 }
 
-void	Channel::removeVoice( int i) {
+void Channel::removeVoice(int i) {
 	this->_voice.erase(i);
 	this->_onlineUsers--;
 }
 
-void	Channel::removeBanned( std::string NickName ) {
+void Channel::removeBanned(std::string NickName) {
 	if (std::find(this->_banned.begin(), this->_banned.end(), NickName) != this->_banned.end())
 		return ;
 
 	this->_banned.erase(std::find(this->_banned.begin(), this->_banned.end(), NickName));
 }
 
-void	Channel::removeMember( int i) {
+void Channel::removeMember(int i) {
 	this->_members.erase(i);
 	this->_onlineUsers--;
 }
