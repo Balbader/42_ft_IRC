@@ -9,10 +9,6 @@ NAME 				:=	./ircserv
 OBJECTSDIR 			:= 	objects
 HEADERS_FOLDER 		:= 	headers
 
-# Name of variables
-FLAGS 				:= 	-Wall -Wextra -Werror
-CPP_STANDARD 		:=	-std=c++98
-
 # Exercise files variable
 SRCS_FOLDER 		:=	srcs
 SRC_FILES 			:=	\
@@ -41,14 +37,13 @@ HEADERS_FILES 		:=	headers/Client.hpp \
 
 MAIN 				:=	main.cpp
 
-# Define objects for all sources
 OBJS 				:=	$(addprefix $(OBJECTSDIR)/, $(SRC_FILES:.cpp=.o))
 MAIN_OBJ 			:=	$(addprefix $(OBJECTSDIR)/, $(MAIN:.cpp=.o))
 
-# Name the compiler
-CC 					:=	c++ -Wall -Wextra -Werror -std=c++98 -g3
+CC 					:=	c++
+FLAGS 				:= 	-Wall -Wextra -Werror -g3
+CPP_STANDARD 		:=	-std=c++98
 
-# OS specific part
 RM 					:=	rm -rf
 RMDIR 				:=	rm -rf
 MKDIR 				:= 	mkdir -p
