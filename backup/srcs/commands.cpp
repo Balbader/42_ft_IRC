@@ -1,6 +1,7 @@
 #include "../headers/Server.hpp"
 
 std::string	Server::_parsing(std::string message, int i) {
+
 	Request	request(_splitRequest(message));
 
 	if (request.invalidMessage)
