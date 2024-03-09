@@ -318,7 +318,9 @@ std::string	Server::_setNickName(Request request, int i) {
 }
 
 
-// 
+// Setting of client username and fullname on the server
+// ensures that clients can't set their username and fullname until ther are
+// authenticated and not already registered
 std::string	Server::_setUserName(Request request, int i) {
 	if (!this->_clients[i]->getAuth())
 		return (_printMessage("998", this->_clients[i]->getNickName(), ":You need to authenticate first"));
@@ -341,24 +343,34 @@ std::string	Server::_setUserName(Request request, int i) {
 	return ("");
 }
 
+
+// handle client's request to disconnet from the server
 std::string	Server::_quit(Request request, int i) {
+
+	// setup string used to notify other users and channels that the client is disconneting
 	std::string ret = this->_clients[i]->getUserPerfix() + "QUIT ";
 
+	// if client provided a message
 	if (request.args.size())
 		ret.append(":" + request.args[0] + "\n");
 	else
 		ret.append("\n");
 
-	std::map<std::string, Channel *> channels = this->_clients[i]->getJoinedChannels();
-	std::map<std::string, Channel *>::iterator it = channels.begin();
+	// get the list of channels the user has joined
+	std::map<std::string, Channel*> channels = this->_clients[i]->getJoinedChannels();
 
-	while (it != channels.end()) {
+	// send the quit message to all users in each channel the client is part of
+	for (std::map<std::string, Channel*>::iterator it = channels.begin(); it != channels.end(); ++it) {
 		_sendToAllUsers(it->second, i, ret);
-		it++;
 	}
 
+	// remove client from all channels
 	this->_clients[i]->leaveAllChannels();
+
+	// close connection between server and client
 	close(this->_clients[i]->getClientfd());
+
+	// remove client from poll
 	_removeFromPoll(i);
 
 	return ("QUIT");
@@ -374,11 +386,11 @@ std::string	Server::_printHelpInfo() {
 	helpInfo.append(GREEN);
 	helpInfo.append("STEP 2: NICK\n");
 	helpInfo.append(RESET);
-	helpInfo.append("\tUse NICK command to set a nickname. e.g: NICK deezNuts69\n\n");
+	helpInfo.append("\tUse NICK command to set a nickname. e.g: NICK [new nickname]\n\n");
 	helpInfo.append(GREEN);
 	helpInfo.append("STEP 3: USER\n");
 	helpInfo.append(RESET);
-	helpInfo.append("\tUse USER command to register your username and fullname.e.g: USER deez * * :Deez Nuts\n\n");
+	helpInfo.append("\tUse USER command to register your username and fullname.e.g: USER [userName] * * :first last\n\n");
 
 	return (helpInfo);
 }
