@@ -91,34 +91,51 @@ std::string	Server::_topic(Request request, int i) {
 	}
 
 	// if there are 2 arguments
+	// find the channel in _allChannels using the name provided 'request.args[0]'
 	std::map<std::string, Channel*>::iterator it = this->_allChannels.find(request.args[0]);
 
 	if (it != this->_allChannels.end()) {
+		// determine user's role
 		std::pair<Client *, int> user = it->second->findUserRole(i);
 
+		// if the user is an operator
 		if (user.second == 1) {
+			// topic is set to new value
 			it->second->setTopic(request.args[1]);
+
+			// 'TOPIC' message is broadcast to all users in the channel
 			std::string reply = "TOPIC " + it->second->getName() + ":" + request.args[1] + "\n";
 			_sendToAllUsers(it->second, i, reply);
 		}
-		else if (user.second == -1  /* Not in channel */)
+		else if (user.second == -1) // user not in channel
 			return (_printMessage("442", this->_clients[i]->getNickName(), request.args[0] + " :You're not on that channel"));
-		else
+		else // if user is not an operator
 			return (_printMessage("482", this->_clients[i]->getNickName(), request.args[0] + " :You're not channel operator"));
 	}
 
+	// if none of the conditions trigger a return statement, return empty string
+	// indicates there is no specific error or status message to return to the client
 	return ("");
 }
 
+// Validate the mode string provided in client's request
 bool Server::_validMode(Request request) {
 	char	c = request.args[1][1];
+
+	// check if lenth is 2 or starts with a '+' for 'enabling mode' or a '-' for 'desabling mode'
 	if (request.args[1].length() != 2 || (request.args[1][0] != '-' && request.args[1][0] != '+'))
 		return false;
+
+	// check if c is valid mode
 	if (c != 'a' && c != 'i' && c != 'w' && c != 'r' && c != 'o' && c != 'O' && c != 's')
 		return false;
+
 	return true;
 }
 
+// NOTE: refactored version of this function underneath
+
+/*
 std::string	Server::_printUserModes(std::string ret, int i) {
 
     std::stringstream ss_a;
@@ -157,6 +174,20 @@ std::string	Server::_printUserModes(std::string ret, int i) {
 	ret.append("\ns: " + tmp_s + "\n");
 
 	return ret;
+}
+*/
+
+// append user mode to a string and return it
+std::string Server::_printUserModes(std::string ret, int i) {
+    char modes[] = {'a', 'i', 'w', 'r', 'o', 'O', 's'};
+    std::stringstream ss;
+
+    for (long unsigned int j = 0; j < sizeof(modes) / sizeof(modes[0]); ++j) {
+        ss << "\n" << modes[j] << ": " << this->_clients[i]->getMode(modes[j]);
+    }
+
+    ret.append(ss.str());
+    return ret;
 }
 
 std::string	Server::_setMode(Request request, int i) {
