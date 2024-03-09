@@ -1,7 +1,9 @@
 #include "../headers/Server.hpp"
 
 void Server::_ClientRequest(int i) {
+	// buffer to store received data
 	char buf[6000];
+
 	int sender_fd = this->_pfds[i].fd;
 	int nbytes = recv(sender_fd, buf, sizeof(buf), 0);
 
