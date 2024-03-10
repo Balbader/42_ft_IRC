@@ -137,50 +137,6 @@ bool Server::_validMode(Request request) {
 	return true;
 }
 
-// NOTE: refactored version of this function underneath
-
-/*
-std::string	Server::_printUserModes(std::string ret, int i) {
-
-    std::stringstream ss_a;
-    ss_a << this->_clients[i]->getMode('a');
-    std::string tmp_a = ss_a.str();
-	ret.append("a: " + tmp_a);
-
-    std::stringstream ss_i;
-    ss_i << this->_clients[i]->getMode('i');
-    std::string tmp_i = ss_i.str();
-	ret.append("\ni: " + tmp_i);
-
-    std::stringstream ss_w;
-    ss_w << this->_clients[i]->getMode('w');
-    std::string tmp_w = ss_w.str();
-	ret.append("\nw: " + tmp_w);
-
-    std::stringstream ss_r;
-    ss_r << this->_clients[i]->getMode('r');
-    std::string tmp_r = ss_r.str();
-	ret.append("\nr: " + tmp_r);
-
-    std::stringstream ss_o;
-    ss_o << this->_clients[i]->getMode('o');
-    std::string tmp_o = ss_o.str();
-	ret.append("\no: " + tmp_o);
-
-    std::stringstream ss_O;
-    ss_O << this->_clients[i]->getMode('O');
-    std::string tmp_O = ss_O.str();
-	ret.append("\nO: " + tmp_O);
-
-    std::stringstream ss_s;
-    ss_s << this->_clients[i]->getMode('s');
-    std::string tmp_s = ss_s.str();
-	ret.append("\ns: " + tmp_s + "\n");
-
-	return ret;
-}
-*/
-
 // append user mode to a string and returns it
 std::string Server::_printUserModes(std::string ret, int i) {
     char modes[] = {'a', 'i', 'w', 'r', 'o', 'O', 's'};
@@ -261,10 +217,10 @@ std::string	Server::_setPassWord(Request request, int i) {
 		return (_printMessage("461", this->_clients[i]->getNickName(), "PASS :Not enough parameters"));
 
 	if (this->_clients[i]->getRegistered())
-		return (_printMessage("462", this->_clients[i]->getNickName(), ":Unauthorized command (already registered)"));
+		return (_printMessage("462", this->_clients[i]->getNickName(), ":You may not reregister"));
 
 	if (request.args[0] != this->_password) // check password match
-		return (_printMessage("997", this->_clients[i]->getNickName(), ":Incorrect password"));
+		return (_printMessage("464", this->_clients[i]->getNickName(), ":Password incorrect"));
 	else
 		this->_clients[i]->setAuth(true);
 
