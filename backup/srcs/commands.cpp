@@ -5,6 +5,7 @@ std::string	Server::_parsing(std::string message, int i) {
 	// Initiate a 'request' object which parses the input message
 	Request	request(_splitRequest(message));
 
+    std::cout << "Message: " << message << std::endl;
 	if (request.invalidMessage)
 		return ("Invalid message!\n");
 
