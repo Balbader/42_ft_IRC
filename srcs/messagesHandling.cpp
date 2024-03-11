@@ -13,6 +13,7 @@ std::string	Server::_welcomemsg(void) {
 	welcome.append("You need to login so you can start chatting OR you can send HELP to see how :) \n");
 	welcome.append(RESET);
 
+    std::cout << "[server]: " << destfd << " _welcomemsg :" << message << std::endl;
 	return (welcome);
 }
 
@@ -21,8 +22,8 @@ int	Server::_sendall(int destfd, std::string message) {
 	int bytesleft = message.length();
 	int b;
 
+    std::cout << "[server]: " << destfd << " _sendall :" << message << std::endl;
 	while (total < (int)message.length()) {
-        std::cout << "[server]: " << destfd << " _sendall :" << message << std::endl;
 		b = send(destfd, message.c_str() + total, bytesleft, 0);
 
 		if (b == -1)
