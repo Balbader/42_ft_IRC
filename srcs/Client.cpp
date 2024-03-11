@@ -217,4 +217,4 @@ std::string	Client::getAllChannels() const {
 
 std::string	Client::getUserPerfix() const { return (":" + this->_NickName + "!" + this->_UserName + "@" + this->_Host + " "); }
 
-std::map<std::string, Channel *>	Client::getJoinedChannels() const { return (this->_joinedChannels); }
+std::map<std::string, Channel*>	Client::getJoinedChannels() const { return (this->_joinedChannels); }
