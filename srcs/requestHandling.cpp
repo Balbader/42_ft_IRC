@@ -31,6 +31,7 @@ void Server::_ClientRequest(int i) {
 
 		// parse the client's request
 		std::string ret = _parsing(message, this->_pfds[i].fd);
+        std::cout << "[server]: " << sender_fd << " client request :" << ret << std::endl;
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
 	}
