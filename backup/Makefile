@@ -20,7 +20,6 @@ SRC_FILES 			:=	\
 						pollHandling.cpp \
 						requestHandling.cpp \
 						Channel.cpp \
-						DeezNuts.cpp \
 						utils.cpp \
 						PartCommand.cpp \
 						JoinCommand.cpp \
