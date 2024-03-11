@@ -17,9 +17,11 @@ File & File::operator=( const File &rhs )
 {
 	if (this == &rhs)
 		return (*this);
+
 	this->Name = rhs.Name;
 	this->Path = rhs.Path;
 	this->sender = rhs.sender;
 	this->receiver = rhs.receiver;
+
 	return (*this);
 }
