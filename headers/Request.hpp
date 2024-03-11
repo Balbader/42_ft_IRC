@@ -7,7 +7,6 @@ public:
     std::string	command;
     bool invalidMessage;
 
-public:
     Request();
     ~Request();
     Request( const Request &x );
