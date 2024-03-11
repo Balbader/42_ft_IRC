@@ -1,8 +1,8 @@
 #include "../headers/Client.hpp"
 
 // ===============================================================> Constructor
-Client::Client(): _clientfd(0), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
-Client::Client( int fd ): _clientfd(fd), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("deez.nuts"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
+Client::Client(): _clientfd(0), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("le_basilou"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
+Client::Client( int fd ): _clientfd(fd), _Auth(false), _Registered(false), _isOperator(false), _NickName(), _UserName(), _FullName(), _Host("le_basilou"), _ID(), _remotaddr(), _addrlen(), _modes(), _joinedChannels() {}
 
 
 // ==========================================================> Copy Constructor
