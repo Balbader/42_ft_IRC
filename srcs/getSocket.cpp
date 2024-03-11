@@ -30,6 +30,7 @@ void Server::_getSocket(std::string Port) {
 		}
 		break;
 	}
+
 	freeaddrinfo(serverinfo);
 
 	if (tmp == NULL) {
