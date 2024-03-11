@@ -40,6 +40,14 @@ std::string	Server::_printMessage(std::string num, std::string nickname, std::st
 	return (":" + this->_name + " " + num + " " + nickname + " " + message + "\n");
 }
 
+void sendClient(int fd_client, std::string msg) {
+
+    std::cout << "[server]: " << fd_client << " send this request :" << msg << std::endl;
+
+    if (send(fd_client, msg.c_str(), msg.length(), 0) == -1)
+        std::cout << "send() error: " << strerror(errno) << std::endl;
+}
+
 void Server::_newClient(void) {
 	struct sockaddr_storage	remotaddr;
 	socklen_t addrlen;
@@ -55,8 +63,7 @@ void Server::_newClient(void) {
 
 		std::string welcome = _welcomemsg();
 
-		if (send(newfd, welcome.c_str(), welcome.length(), 0) == -1)
-			std::cout << "send() error: " << strerror(errno) << std::endl;
+        sendClient(newfd, welcome);
 
 		std::cout << "[" << currentDateTime() << "]: new connection from " << inet_ntoa(((struct sockaddr_in*)&remotaddr)->sin_addr) << " on socket " << newfd << std::endl;
 	}
