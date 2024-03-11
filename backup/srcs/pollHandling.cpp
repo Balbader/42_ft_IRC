@@ -1,6 +1,7 @@
 #include "../headers/Server.hpp"
 
 void Server::_addToPoll(int newfd) {
+
 	if (this->_online_c == this->_max_online_c) {
 		this->_max_online_c *= 2;
 		this->_pfds = (struct pollfd *)realloc(this->_pfds, this->_max_online_c);
