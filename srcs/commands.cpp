@@ -254,6 +254,7 @@ std::string	Server::_setNickName(Request request, int i) {
 
 	// set new nickname
 	this->_clients[i]->setNickName(request.args[0]);
+    std::cout << "[server]: " << i << " is set to nickname :" << request.args[0] << std::endl;
 
 	// add new nickname
 	this->_clientNicknames.push_back(this->_clients[i]->getNickName());
