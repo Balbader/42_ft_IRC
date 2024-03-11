@@ -1,60 +1,68 @@
-# Name of the final executable files
-NAME = ./ircserv
+########
+# NAME #
+########
+NAME 				:=	./ircserv
 
-# Project's directories
-SRCS_FOLDER = srcs
-OBJECTSDIR = objects
-HEADERS_FOLDER = headers
-
-# Name of variables
-FLAGS = -Wall -Wextra -Werror
-CPP_STANDARD = -std=c++98
-RED = \033[1;31m
-GREEN = \033[1;32m
-YELLOW = \033[1;33m
-BLUE = \033[1;34m
-RESET = \033[0m
+###############
+# INGREDIENTS #
+###############
+OBJECTSDIR 			:= 	objects
+HEADERS_FOLDER 		:= 	headers
 
 # Exercise files variable
-SRC_FILES = Client.cpp \
-Server.cpp \
-commands.cpp \
-getSocket.cpp \
-messagesHandling.cpp \
-pollHandling.cpp \
-requestHandling.cpp \
-Channel.cpp \
-DeezNuts.cpp \
-utils.cpp \
-PartCommand.cpp \
-JoinCommand.cpp \
-KickCommand.cpp \
-PrivmsgCommand.cpp \
-Request.cpp \
-File.cpp \
+SRCS_FOLDER 		:=	srcs
+SRC_FILES 			:=	\
+						Client.cpp \
+						Server.cpp \
+						commands.cpp \
+						getSocket.cpp \
+						messagesHandling.cpp \
+						pollHandling.cpp \
+						requestHandling.cpp \
+						Channel.cpp \
+						utils.cpp \
+						PartCommand.cpp \
+						JoinCommand.cpp \
+						KickCommand.cpp \
+						PrivmsgCommand.cpp \
+						Request.cpp \
+						File.cpp \
 
-HEADERS_FILES = headers/Client.hpp \
-headers/Server.hpp \
-headers/Channel.hpp \
-headers/Request.hpp \
-headers/File.hpp \
+HEADERS_FILES 		:=	headers/Client.hpp \
+						headers/Server.hpp \
+						headers/Channel.hpp \
+						headers/Request.hpp \
+						headers/File.hpp \
 
-MAIN = main.cpp
+MAIN 				:=	main.cpp
 
-# Define objects for all sources
-OBJS := $(addprefix $(OBJECTSDIR)/, $(SRC_FILES:.cpp=.o))
-MAIN_OBJ = $(addprefix $(OBJECTSDIR)/, $(MAIN:.cpp=.o))
+OBJS 				:=	$(addprefix $(OBJECTSDIR)/, $(SRC_FILES:.cpp=.o))
+MAIN_OBJ 			:=	$(addprefix $(OBJECTSDIR)/, $(MAIN:.cpp=.o))
 
-# Name the compiler
-CC = c++ -Wall -Wextra -Werror -std=c++98 -g3
+CC 					:=	c++
+FLAGS 				:= 	-Wall -Wextra -Werror -g3
+CPP_STANDARD 		:=	-std=c++98
 
-# OS specific part
-RM = rm -rf
-RMDIR = rm -rf
-MKDIR = mkdir -p
-MAKE = make -C
-ECHO = /bin/echo
-ERRIGNORE = 2>/dev/null
+RM 					:=	rm -rf
+RMDIR 				:=	rm -rf
+MKDIR 				:= 	mkdir -p
+MAKE 				:=	make -C
+
+ECHO 				:=	/bin/echo
+ERRIGNORE			:=	2>/dev/null
+
+##########
+# COLORS #
+##########
+RED 				:= 	\033[1;31m
+GREEN				:=	\033[1;32m
+YELLOW 				:=	\033[1;33m
+BLUE				:=	\033[1;34m
+RESET				:=	\033[0m
+
+###########
+# RECIPES #
+###########
 
 all: $(NAME)
 	@echo "$(BLUE)Compiling is DONE $(RESET)"
@@ -62,7 +70,6 @@ all: $(NAME)
 head:
 	@echo "$(BLUE)Making ft_irc Server $(RESET)"
 
-# Phonebook making rules
 $(NAME): head $(OBJS) $(MAIN_OBJ) $(HEADERS_FILES)
 	@$(CC) $(CPP_STANDARD) $(OBJECTSDIR)/main.o $(OBJS) -o $@ -g
 
@@ -77,7 +84,6 @@ $(OBJECTSDIR)/%.o: main.cpp $(HEADERS_FILES)
 	@$(CC) $(CPP_STANDARD) $(FLAGS) -o $@ -c $< -g
 	@echo "\r\t\t\t\t\t\t\t$(GREEN){DONE}$(RESET)"
 
-# Remove all objects, dependencies and executable files generated during the build
 clean:
 	@echo "$(RED)deleting$(RESET): " $(OBJECTSDIR)
 	@$(RMDIR) $(OBJECTSDIR)
