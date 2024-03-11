@@ -2,6 +2,7 @@
 
 std::string	Server::_welcomemsg(void) {
 	std::string welcome = RED;
+
 	welcome.append("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗\n");
 	welcome.append("██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝\n");
 	welcome.append("██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗\n");
@@ -11,6 +12,7 @@ std::string	Server::_welcomemsg(void) {
 	welcome.append(BLUE);
 	welcome.append("You need to login so you can start chatting OR you can send HELP to see how :) \n");
 	welcome.append(RESET);
+
 	return (welcome);
 }
 
@@ -20,6 +22,7 @@ int	Server::_sendall(int destfd, std::string message) {
 	int b;
 
 	while (total < (int)message.length()) {
+        std::cout << "[server]: " << destfd << " _sendall :" << message << std::endl;
 		b = send(destfd, message.c_str() + total, bytesleft, 0);
 
 		if (b == -1)
