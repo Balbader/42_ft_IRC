@@ -282,7 +282,7 @@ std::string	Server::_setUserName(Request request, int i) {
 		return (_printMessage("998", this->_clients[i]->getNickName(), ":You need to authenticate first"));
 
 	if (this->_clients[i]->getRegistered())
-		return (_printMessage("462", this->_clients[i]->getNickName(), ":Unauthorized command (already registered)"));
+		return (_printMessage("462", this->_clients[i]->getNickName(), ":You may not reregister"));
 
 	if (request.args.size() < 4)
 		return (_printMessage("461", this->_clients[i]->getNickName(), "USER :Not enough parameters"));
