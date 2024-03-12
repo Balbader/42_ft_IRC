@@ -13,7 +13,6 @@ std::string	Server::_welcomemsg(void) {
 	welcome.append("You need to login so you can start chatting OR you can send HELP to see how :) \n");
 	welcome.append(RESET);
 
-    std::cout << "[server]: " << destfd << " _welcomemsg :" << message << std::endl;
 	return (welcome);
 }
 
