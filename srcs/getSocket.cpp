@@ -1,6 +1,6 @@
 #include "../headers/Server.hpp"
 
-// Set up a server socket that listens for incoming connections on aspecified port.
+// Set up a server socket that listens for incoming connections on a specified port.
 void Server::_getSocket(std::string Port) {
 	int yes = 1;
 	int status;
