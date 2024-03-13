@@ -44,8 +44,12 @@ private:
 	Server();
 	std::string	_welcomemsg(void);
 	void _getSocket(std::string Port);
+
+	// pollHandling.cpp
 	void _addToPoll(int newfd);
 	void _removeFromPoll(int i);
+
+
 	void _newClient(void);
 	void _ClientRequest(int i);
 	int	_sendall(int destfd, std::string message);
@@ -64,6 +68,7 @@ private:
 	std::string	_kick(Request request, int i);
 	std::string	_sendMessage(std::string message, int i);
 	std::string	_printMessage(std::string num, std::string nickname, std::string message);
+
 	// commands.cpp
 	std::string	_parsing(std::string message, int i);
 	Request	_splitRequest(std::string req);
