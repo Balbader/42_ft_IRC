@@ -2,29 +2,37 @@
 
 std::string	Server::_joinChannel( Request request, int i ) {
 	int j = 1;
+
+	// check if client is registered
 	if (!this->_clients[i]->getRegistered())
 		return (_printMessage("451", this->_clients[i]->getNickName(), ":You have not registered"));
 
+	// check the number of parameters
 	if (request.args.size() == 0)
 		return (_printMessage("461", this->_clients[i]->getNickName(), ":Not enough parameters"));
 
+	// if arg is 0 leave all channels
 	if (request.args[0] == "0")
 		return(this->_clients[i]->leaveAllChannels());
 
+	// parse the list of channels the client wants to join
 	std::vector<std::string> parsChannels(_commaSeparator(request.args[0]));
 	std::vector<std::string> parsKeys;
-
+	// make sure channels and keys are seperated by commas
 	if (request.args.size() == 2)
 		parsKeys = _commaSeparator(request.args[1]);
 
+
+	// iterate  over the list of channels and attempt to join each one
+	// if keys are provided, it uses them to join private channels
 	std::vector<std::string>::iterator itChannels = parsChannels.begin();
 	std::vector<std::string>::iterator itKeys = parsKeys.begin();
-
 	while (itChannels != parsChannels.end() && j == 1) {
 		if ( itKeys != parsKeys.end())
 			j = _createPrvChannel(*itChannels, *itKeys, i);
 		else
 			j = _createChannel(*itChannels, i);
+
 		if (j == BADCHANMASK)
 			return (_printMessage("476", this->_clients[i]->getNickName(), *itChannels + " :Bad Channel Mask"));
 
@@ -45,6 +53,7 @@ std::string	Server::_joinChannel( Request request, int i ) {
 
 		if (itKeys != parsKeys.end())
 			itKeys++;
+
 		itChannels++;
 	}
 	--itChannels;
