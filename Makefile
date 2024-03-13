@@ -9,7 +9,6 @@ NAME 				:=	./ircserv
 OBJECTSDIR 			:= 	objects
 HEADERS_FOLDER 		:= 	headers
 
-# Exercise files variable
 SRCS_FOLDER 		:=	srcs
 SRC_FILES 			:=	\
 						Client.cpp \
