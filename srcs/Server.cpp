@@ -42,7 +42,7 @@ std::string	Server::_printMessage(std::string num, std::string nickname, std::st
 
 void sendClient(int fd_client, std::string msg) {
 
-    std::cout << "[server]: " << fd_client << " sent this request :" << msg << "\n" << std::endl;
+    std::cout << "[server]: " << fd_client << " sent this request :\n" << msg << "\n" << std::endl;
 
     if (send(fd_client, msg.c_str(), msg.length(), 0) == -1)
         std::cout << "send() error: " << strerror(errno) << std::endl;
