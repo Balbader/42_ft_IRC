@@ -17,39 +17,48 @@ std::string	Server::_welcomemsg(void) {
 }
 
 int	Server::_sendall(int destfd, std::string message) {
-	int total = 0;
-	int bytesleft = message.length();
-	int b;
+	int total = 0; // track total number of bytes sent
+	int bytesleft = message.length(); // keep track of how many bytes still need to be sent
+	int b; // used to store the result of each send call
 
-    std::cout << "[server]: " << destfd << " _sendall :" << message << std::endl;
+
+	// print to console the descriptor of the destination and the message that is being sent
+    std::cout << "[server]: " << destfd << " _sendall :\n" << message << std::endl;
+
 	while (total < (int)message.length()) {
 		b = send(destfd, message.c_str() + total, bytesleft, 0);
 
-		if (b == -1)
+		if (b == -1) // if an error has occured
             break;
 
 		total += b;
 		bytesleft -= b;
 	}
 
+	// if success returns 0 else returns -1
 	return (b == -1 ? -1 : 0);
 }
 
+
+// ensures that all active participants in a channel receive messages and updates
 std::string	Server::_sendToAllUsers( Channel *channel, int senderFd, std::string message) {
 
-	std::map<int, Client *> allusers = channel->getAllUsers();
-	std::map<int, Client *>::iterator it = allusers.begin();
+	// retrieves al lusers in channel
+	std::map<int, Client*> allusers = channel->getAllUsers();
+
+	// init reply message
 	std::string reply = this->_clients[senderFd]->getUserPerfix();
 	reply.append(message);
 
-	while (it != allusers.end()) {
+	// iterate over each user
+	for (std::map<int, Client*>::iterator it = allusers.begin(); it != allusers.end(); ++it) {
+		// check if user's fd is not senderFd
+		// this is to make sure that the message is not sent back to the sender
 		if (senderFd != it->first)
 			if (_sendall(it->first, reply) == -1) {
 				std::cout << "_sendall() error: " << strerror(errno) << std::endl;
 				return ("");
 			}
-		it++;
 	}
-
 	return ("");
 }
