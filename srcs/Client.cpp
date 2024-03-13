@@ -188,7 +188,7 @@ std::string	Client::getAllChannels() const {
 	channels.append("█              █              █                    █                                  █\n");
 	channels.append("███████████████████████████████████████████████████████████████████████████████████████\n");
 
-	std::map<std::string, Channel *>::const_iterator it = this->_joinedChannels.begin();
+	std::map<std::string, Channel*>::const_iterator it = this->_joinedChannels.begin();
     std::stringstream ss;
     ss << it->second->getOnlineUsers();
     std::string size = ss.str();
