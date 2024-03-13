@@ -1,16 +1,18 @@
 #include "../headers/Request.hpp"
 
 // Constructor
-Request::Request(): args(), command(), invalidMessage(false) {};
+Request::Request(): args(), command(), invalidMessage(false) {}
 
 // Copy Constructor
-Request::Request( const Request& x ) { *this = x; };
+Request::Request(const Request & x) {
+	*this = x;
+}
 
 // Destructor
-Request::~Request() {};
+Request::~Request() {}
 
 // Assignment operator
-Request & Request::operator= ( const Request& rhs ) {
+Request & Request::operator= (const Request & rhs) {
 	if (this == &rhs)
 		return (*this);
 
