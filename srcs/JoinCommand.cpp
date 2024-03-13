@@ -28,6 +28,7 @@ std::string	Server::_joinChannel( Request request, int i ) {
 	std::vector<std::string>::iterator itChannels = parsChannels.begin();
 	std::vector<std::string>::iterator itKeys = parsKeys.begin();
 	while (itChannels != parsChannels.end() && j == 1) {
+
 		if ( itKeys != parsKeys.end())
 			j = _createPrvChannel(*itChannels, *itKeys, i);
 		else
@@ -58,29 +59,41 @@ std::string	Server::_joinChannel( Request request, int i ) {
 	}
 	--itChannels;
 
+	// if success return empty string
 	return ("");
 }
 
 int	Server::_createChannel( std::string ChannelName, int CreatorFd ) {
-	std::map<std::string, Channel *>::iterator it = this->_allChannels.find(ChannelName);
 
+	// search for ChannelName in _allChannels
+	std::map<std::string, Channel *>::iterator it = this->_allChannels.find(ChannelName);
 	if (it == this->_allChannels.end()) {
 		if (ChannelName[0] != '&' && ChannelName[0] != '#' && ChannelName[0] != '+' && ChannelName[0] != '!')
 			return (BADCHANMASK);
 
+		// if name is valid, create new channel
 		Channel *channel = new Channel(ChannelName, this->_clients[CreatorFd]);
+
+		// insert it to _allChannels map
 		this->_allChannels.insert(std::pair<std::string, Channel *>(ChannelName, channel));
+
+		// add the creator as a member of the channel
 		this->_clients[CreatorFd]->joinChannel( ChannelName, channel );
 	}
 
+	// if channel already exist
 	else {
-		if (it->second->getKey().empty()) {
+		if (it->second->getKey().empty()) { // if no key required
+
 			int i = 0;
+
+			// add creator as operator or member based on their status
 			if (this->_clients[CreatorFd]->getisOperator() == true)
 				i = it->second->addOperator(this->_clients[CreatorFd]);
 			else
 				i = it->second->addMember(this->_clients[CreatorFd]);
 
+			// if already a member
 			if (i == USERISJOINED)
 				this->_clients[CreatorFd]->joinChannel( it->first, it->second );
 			else if (i == USERALREADYJOINED)
@@ -88,11 +101,13 @@ int	Server::_createChannel( std::string ChannelName, int CreatorFd ) {
 			else if (i == BANNEDFROMCHAN)
 				return (BANNEDFROMCHAN);
 
+			// once the creator is aded, server sends various messages to notify other clients
 			_sendall(CreatorFd, this->_clients[CreatorFd]->getUserPerfix() + "JOIN " + ChannelName + "\n");
 			_sendall(CreatorFd, _printMessage("332", this->_clients[CreatorFd]->getNickName(), ChannelName + " :" + it->second->getTopic()));
 			_sendall(CreatorFd, _printMessage("353", this->_clients[CreatorFd]->getNickName() + " = " + ChannelName, it->second->listAllUsers()));
 			_sendall(CreatorFd, _printMessage("353", this->_clients[CreatorFd]->getNickName() + " " + ChannelName, ":End of NAMES list"));
 
+			// send 'JOIN' message to all users in the channel to notify them that a new member has joined
 			std::string reply = "JOIN " + ChannelName + "\n";
 			_sendToAllUsers(it->second, CreatorFd, reply);
 
