@@ -14,10 +14,6 @@ This project is about creating our own IRC server. We used an actual IRC client 
     -  We must have operators and regular users.
     -  Then, we have to implement the commands that are specific to operators.
 
-## Bonus part 
-Here are the extra features we added to our IRC server so it looks even more like and actual IRC server:
-  - A meme bot named **DEEZNUTS**.
-
 # Our IRC Commands
 These are the available commands in our IRC Server:
   - **PASS**: The **PASS** command is used to set a 'connection password'.
