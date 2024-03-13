@@ -32,9 +32,6 @@ These are the available commands in our IRC Server:
   - **KICK**: The KICK command can be used to request the forced removal of a user from a channel.
   - **PRIVMSG**: PRIVMSG is used to send private messages between users, as well as to send messages to channels.
   - **NOTICE**: The NOTICE command is used similarly to PRIVMSG.
-  - **SENDFILE**: The SENDFILE command is used to send a file to another user.
-  - **GETFILE**: The GETFILE command is used to receive a file from another user.
-  - **DEEZNUTS**: The DEEZNUTS command is a bot that helps you with various types of information about the server.
 
 # Start IRC Server
 To compile the program, use:
