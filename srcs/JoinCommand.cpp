@@ -117,9 +117,14 @@ int	Server::_createChannel( std::string ChannelName, int CreatorFd ) {
 	return (USERISJOINED);
 }
 
+// ensures secure handling of private channels by requiring a key for creation of joining
+// therefor adding an extra layer of privacy and control over who can access the channel
 int	Server::_createPrvChannel( std::string ChannelName, std::string ChannelKey, int CreatorFd) {
+
+	// search for ChannelName in _allChannels
 	std::map<std::string, Channel *>::iterator it = this->_allChannels.find(ChannelName);
 
+	// if channel doesn't exist
 	if (it == this->_allChannels.end()) {
 		if (ChannelName[0] != '&' && ChannelName[0] != '#' && ChannelName[0] != '+' && ChannelName[0] != '!')
 			return (BADCHANMASK);
@@ -129,9 +134,8 @@ int	Server::_createPrvChannel( std::string ChannelName, std::string ChannelKey, 
 		this->_clients[CreatorFd]->joinChannel(ChannelName, channel);
 	}
 
-	else
-	{
-		if (it->second->getKey() == ChannelKey) {
+	else { // if channel exist
+		if (it->second->getKey() == ChannelKey) { // check if provided key matches ChannelKey
 			int i = 0;
 
 			if (this->_clients[CreatorFd]->getisOperator() == true)
@@ -161,15 +165,21 @@ int	Server::_createPrvChannel( std::string ChannelName, std::string ChannelKey, 
 	return (USERISJOINED);
 }
 
+
+// parse a comma-seperated list of values into individual strings
 std::vector<std::string> Server::_commaSeparator(std::string arg) {
 	std::vector<std::string> ret;
 	size_t pos = 0;
 
+	// everytime a comma is encountered, extract substring from beginning of the string up to the comma
 	while ((pos = arg.find(",")) != std::string::npos) {
+		// add substring to ret
 		ret.push_back(arg.substr(0, pos));
+		// erase the added part from original string
 		arg.erase(0, pos + 1);
 	}
 
+	// last substring is added to ret
 	ret.push_back(arg.substr(0, pos));
 	return (ret);
 }
