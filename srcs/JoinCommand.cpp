@@ -63,7 +63,7 @@ std::string	Server::_joinChannel( Request request, int i ) {
 	return ("");
 }
 
-int	Server::_createChannel( std::string ChannelName, int CreatorFd ) {
+int	Server::_createChannel(std::string ChannelName, int CreatorFd) {
 
 	// search for ChannelName in _allChannels
 	std::map<std::string, Channel *>::iterator it = this->_allChannels.find(ChannelName);
@@ -119,10 +119,10 @@ int	Server::_createChannel( std::string ChannelName, int CreatorFd ) {
 
 // ensures secure handling of private channels by requiring a key for creation of joining
 // therefor adding an extra layer of privacy and control over who can access the channel
-int	Server::_createPrvChannel( std::string ChannelName, std::string ChannelKey, int CreatorFd) {
+int	Server::_createPrvChannel(std::string ChannelName, std::string ChannelKey, int CreatorFd) {
 
 	// search for ChannelName in _allChannels
-	std::map<std::string, Channel *>::iterator it = this->_allChannels.find(ChannelName);
+	std::map<std::string, Channel*>::iterator it = this->_allChannels.find(ChannelName);
 
 	// if channel doesn't exist
 	if (it == this->_allChannels.end()) {
