@@ -23,27 +23,12 @@ std::string fillIt(std::string str, size_t len);
 const std::string currentDateTime();
 
 class Client {
-private:
-    int	_clientfd;
-    bool _Auth;
-    bool _Registered;
-    bool _isOperator;
-    std::string	_NickName;
-    std::string	_UserName;
-    std::string	_FullName;
-    const std::string _Host;
-    std::string	_ID;
-    struct sockaddr_storage	_remotaddr;
-    socklen_t _addrlen;
-    struct Modes _modes;
-    std::map<std::string, Channel *> _joinedChannels;
-
 public:
     Client();
-    Client( int fd );
-    Client( const Client & x );
+    Client(int fd);
+    Client(const Client & x);
     ~Client();
-    Client & operator= ( const Client & rhs );
+    Client & operator=(const Client & rhs);
 
     // Getters
     std::string	getUserName() const;
@@ -65,7 +50,6 @@ public:
     void setUserName(std::string UserName);
     void setNickName(std::string NickName);
     void setFullName(std::string FullName);
-    // void	setHost(std::string Host);
     void setID(std::string ID);
     void setClientfd(int clientfd);
     void setAuth(int Auth);
@@ -79,4 +63,19 @@ public:
     int	isJoined( std::string ChannelName ) const;
 
     std::string	JoinedChannels() const;
+
+private:
+    int	_clientfd;
+    bool _Auth;
+    bool _Registered;
+    bool _isOperator;
+    std::string	_NickName;
+    std::string	_UserName;
+    std::string	_FullName;
+    const std::string _Host;
+    std::string	_ID;
+    struct sockaddr_storage	_remotaddr;
+    socklen_t _addrlen;
+    struct Modes _modes;
+    std::map<std::string, Channel*> _joinedChannels;
 };
