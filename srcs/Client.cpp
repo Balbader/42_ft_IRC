@@ -192,6 +192,7 @@ std::string	Client::getAllChannels() const {
     std::stringstream ss;
     ss << it->second->getOnlineUsers();
     std::string size = ss.str();
+
 	while (it != this->_joinedChannels.end()) {
 		channels.append("█              █              █                    █                                  █\n");
 		channels.append("█ " RESET + fillIt(it->first, 12));
