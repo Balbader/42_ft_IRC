@@ -70,10 +70,6 @@ private:
 	int	_createPrvChannel(std::string ChannelName, std::string ChannelKey, int	 CreatorFd);
 	int	_createChannel(std::string channelName, int CreatorFd);
 	int	_partChannel(std::string ChannelName, int i, std::string message, int isPart);
-	std::string	_DeezNuts( Request request, int i);
-	std::string	_sendFile( Request request, int i);
-	std::string	_getFile( Request request, int i);
-	std::string	_getBotMessage();
 	std::string	_listAllChannels() const;
 	std::string	_channelInfo(std::string ChannelName, int i);
 	std::string	_serverInfo() const;
