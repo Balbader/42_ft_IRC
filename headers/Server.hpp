@@ -23,7 +23,6 @@
 class Client;
 class Channel;
 class Request;
-class File;
 
 class Server
 {
@@ -39,7 +38,6 @@ private:
 	std::map<std::string, Channel*> _allChannels;
 	std::vector<std::string> _unavailableUserName;
 	std::vector<std::string> _clientNicknames;
-	std::map<std::string, File>	_files;
 
 	Server();
 	std::string	_welcomemsg(void);
@@ -99,4 +97,3 @@ public:
 #include "Channel.hpp"
 #include "Client.hpp"
 #include "Request.hpp"
-#include "File.hpp"
