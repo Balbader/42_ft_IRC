@@ -25,13 +25,11 @@ SRC_FILES 			:=	\
 						KickCommand.cpp \
 						PrivmsgCommand.cpp \
 						Request.cpp \
-						File.cpp \
 
 HEADERS_FILES 		:=	headers/Client.hpp \
 						headers/Server.hpp \
 						headers/Channel.hpp \
 						headers/Request.hpp \
-						headers/File.hpp \
 
 MAIN 				:=	main.cpp
 
