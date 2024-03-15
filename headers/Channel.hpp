@@ -15,52 +15,38 @@
 #include "Server.hpp"
 
 class Channel {
-private:
-    char _prefix;
-    Client* _creator;
-    int _onlineUsers;
-    std::string	_name;
-    std::string	_key;
-    std::string	_topic;
-    std::map<int, Client *>	_members;
-    std::map<int, Client *>	_operators;
-    std::map<int, Client *>	_voice;
-    std::vector<std::string> _banned;
-
-    Channel();
-
 public:
-    Channel( std::string channelName, Client *Creater );
-    Channel( std::string channelName, std::string channelKey, Client *Creater );
-    Channel( const Channel& x );
-    Channel &operator=( const Channel& rhs );
+    Channel(std::string channelName, Client* Creater);
+    Channel(std::string channelName, std::string channelKey, Client* Creater);
+    Channel(const Channel & x);
+    Channel &operator=(const Channel & rhs);
     ~Channel();
 
     // Getters
-    char const &getPrefix()	const;
-    int const &getOnlineUsers()	const;
-    std::string	const &getName() const;
-    std::string	const &getKey() const;
-    std::string	const &getTopic() const;
-    std::map<int, Client *> const &getMembers() const;
-    std::map<int, Client *> const &getOperators() const;
-    std::map<int, Client *> const &getVoice() const;
-    std::map<std::string, Client *>	const &getBanned() const;
+    char const & getPrefix()	const;
+    int const & getOnlineUsers()	const;
+    std::string	const & getName() const;
+    std::string	const & getKey() const;
+    std::string	const & getTopic() const;
+    std::map<int, Client*> const & getMembers() const;
+    std::map<int, Client*> const & getOperators() const;
+    std::map<int, Client*> const & getVoice() const;
+    std::map<std::string, Client*>	const & getBanned() const;
 
     Client*	getCreator() const;
-    std::map<int, Client *>	getAllUsers() const;
-    std::pair<Client *, int> findUserRole( int i );
-    std::string	listAllUsers() const;
+    std::map<int, Client*>	getAllUsers() const;
+    std::pair<Client*, int> findUserRole( int i );
+    std::string	listAllUsers() 
 
     // Methods
-    int	addMember( Client *member );
-    int	addOperator( Client *member );
-    void addVoice( Client *member );
-    int	banUser( Client *member );
-    void removeOperator( int i );
-    void removeVoice( int i );
-    void removeBanned( std::string NickName );
-    void removeMember( int i );
+    int	addMember(Client* member);
+    int	addOperator( Client* member);
+    void addVoice(Client* member);
+    int	banUser(Client* member);
+    void removeOperator(int i);
+    void removeVoice(int i);
+    void removeBanned(std::string NickName);
+    void removeMember(int i);
 
     // Setters
     void setPrefix(char prefix);
@@ -68,4 +54,18 @@ public:
     void setName(std::string name);
     void setKey(std::string key);
     void setTopic(std::string topic);
+
+private:
+    char _prefix;
+    Client* _creator;
+    int _onlineUsers;
+    std::string	_name;
+    std::string	_key;
+    std::string	_topic;
+    std::map<int, Client*>	_members;
+    std::map<int, Client*>	_operators;
+    std::map<int, Client*>	_voice;
+    std::vector<std::string> _banned;
+
+    Channel();
 };
