@@ -1,17 +1,22 @@
 #include "../headers/Channel.hpp"
 
 // Constructor
-Channel::Channel() : _prefix(), _creator(), _onlineUsers(), _name(), _key(), _topic(), _members(), _operators(), _voice(), _banned() {}
+Channel::Channel()
+: _prefix(), _creator(), _onlineUsers(), _name(), _key(), _topic(), _members(), _operators(), _voice(), _banned() {}
 
 // Copy Constructor
 Channel::Channel( const Channel& x ) { *this = x; }
 
 // Constructor overload
-Channel::Channel(std::string channelName, Client *Creator) : _prefix(), _creator(Creator), _onlineUsers(1), _name(channelName), _key(), _topic(), _members(), _operators(), _voice(), _banned() {
+Channel::Channel(std::string channelName, Client *Creator)
+		: _prefix(), _creator(Creator), _onlineUsers(1), _name(channelName), _key(), _topic(), _members(), _operators(), _voice(), _banned()
+{
 	this->_operators.insert(std::pair<int, Client *>(Creator->getClientfd(), Creator));
 }
 
-Channel::Channel(std::string channelName, std::string channelKey, Client *Creator) : _prefix(), _creator(Creator), _onlineUsers(1), _name(channelName), _key(channelKey), _topic(), _members(), _operators(), _voice(), _banned() {
+Channel::Channel(std::string channelName, std::string channelKey, Client *Creator)
+		: _prefix(), _creator(Creator), _onlineUsers(1), _name(channelName), _key(channelKey), _topic(), _members(), _operators(), _voice(), _banned()
+{
 	this->_operators.insert(std::pair<int, Client *>(Creator->getClientfd(), Creator));
 }
 
@@ -112,11 +117,10 @@ void Channel::removeVoice(int i) {
 }
 
 void Channel::removeBanned(std::string NickName) {
-	// remove nickname from banned list
-	// NOTE: verify if != or == this->_banned.end()
 	if (std::find(this->_banned.begin(), this->_banned.end(), NickName) != this->_banned.end())
 		return ;
 
+	// remove nickname from banned list
 	this->_banned.erase(std::find(this->_banned.begin(), this->_banned.end(), NickName));
 }
 
@@ -144,7 +148,7 @@ std::map<int, Client*> Channel::getAllUsers() const {
 // Determine the role of a user within a channel based on the user's file descriptor.
 // it checks three different maps (_members, _operators, _voice)
 // parameter int i = fd of the client whose role is being queired
-std::pair<Client*, int> Channel::findUserRole( int i ) {
+std::pair<Client*, int> Channel::findUserRole(int i) {
 
 	// instanciate iterator and search for file descriptor i in _members
 	std::map<int, Client*>::iterator it = this->_members.find(i);
