@@ -9,6 +9,6 @@ public:
 
     Request();
     ~Request();
-    Request( const Request &x );
-    Request & operator = ( const Request &rhs );
+    Request(const Request & x);
+    Request & operator=(const Request & rhs);
 };
