@@ -15,6 +15,20 @@
 #include "Server.hpp"
 
 class Channel {
+private:
+    char _prefix;
+    Client* _creator;
+    int _onlineUsers;
+    std::string	_name;
+    std::string	_key;
+    std::string	_topic;
+    std::map<int, Client*> _members;
+    std::map<int, Client*> _operators;
+    std::map<int, Client*> _voice;
+    std::vector<std::string> _banned;
+
+    Channel();
+
 public:
     Channel(std::string channelName, Client* Creater);
     Channel(std::string channelName, std::string channelKey, Client* Creater);
@@ -23,8 +37,8 @@ public:
     ~Channel();
 
     // Getters
-    char const & getPrefix()	const;
-    int const & getOnlineUsers()	const;
+    char const & getPrefix() const;
+    int const & getOnlineUsers() const;
     std::string	const & getName() const;
     std::string	const & getKey() const;
     std::string	const & getTopic() const;
@@ -35,8 +49,8 @@ public:
 
     Client*	getCreator() const;
     std::map<int, Client*>	getAllUsers() const;
-    std::pair<Client*, int> findUserRole( int i );
-    std::string	listAllUsers() 
+    std::pair<Client*, int> findUserRole(int i);
+    std::string	listAllUsers() const;
 
     // Methods
     int	addMember(Client* member);
@@ -54,18 +68,4 @@ public:
     void setName(std::string name);
     void setKey(std::string key);
     void setTopic(std::string topic);
-
-private:
-    char _prefix;
-    Client* _creator;
-    int _onlineUsers;
-    std::string	_name;
-    std::string	_key;
-    std::string	_topic;
-    std::map<int, Client*>	_members;
-    std::map<int, Client*>	_operators;
-    std::map<int, Client*>	_voice;
-    std::vector<std::string> _banned;
-
-    Channel();
 };
