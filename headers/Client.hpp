@@ -77,5 +77,5 @@ private:
     struct sockaddr_storage	_remotaddr;
     socklen_t _addrlen;
     struct Modes _modes;
-    std::map<std::string, Channel*> _joinedChannels;
+    std::map<std::string, Channel *> _joinedChannels;
 };
