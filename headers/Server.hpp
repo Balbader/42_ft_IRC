@@ -31,12 +31,12 @@ private:
 	std::string	_name;
 	std::string	_password;
 	int	_socketfd;
-	std::map<int, Client *>	_clients;
+	std::map<int, Client*>	_clients;
 	struct pollfd *_pfds;
 	int	_online_c;
 	int	_max_online_c;
 	std::string	_prefix;
-	std::map<std::string, Channel *> _allChannels;
+	std::map<std::string, Channel*> _allChannels;
 	std::vector<std::string> _unavailableUserName;
 	std::vector<std::string> _clientNicknames;
 	std::map<std::string, File>	_files;
@@ -44,12 +44,8 @@ private:
 	Server();
 	std::string	_welcomemsg(void);
 	void _getSocket(std::string Port);
-
-	// pollHandling.cpp
 	void _addToPoll(int newfd);
 	void _removeFromPoll(int i);
-
-
 	void _newClient(void);
 	void _ClientRequest(int i);
 	int	_sendall(int destfd, std::string message);
@@ -68,8 +64,6 @@ private:
 	std::string	_kick(Request request, int i);
 	std::string	_sendMessage(std::string message, int i);
 	std::string	_printMessage(std::string num, std::string nickname, std::string message);
-
-	// commands.cpp
 	std::string	_parsing(std::string message, int i);
 	Request	_splitRequest(std::string req);
 	std::string _printHelpInfo();
@@ -78,9 +72,9 @@ private:
 	int	_createPrvChannel(std::string ChannelName, std::string ChannelKey, int	 CreatorFd);
 	int	_createChannel(std::string channelName, int CreatorFd);
 	int	_partChannel(std::string ChannelName, int i, std::string message, int isPart);
-	std::string	_DeezNuts(Request request, int i);
-	std::string	_sendFile(Request request, int i);
-	std::string	_getFile(Request request, int i);
+	std::string	_DeezNuts( Request request, int i);
+	std::string	_sendFile( Request request, int i);
+	std::string	_getFile( Request request, int i);
 	std::string	_getBotMessage();
 	std::string	_listAllChannels() const;
 	std::string	_channelInfo(std::string ChannelName, int i);
@@ -91,15 +85,15 @@ private:
 	std::string	_notice(Request request, int i);
 	std::string	_privToUser(std::string User, std::string message, std::string cmd, int i);
 	std::string	_privToChannel(std::string ChannelName, std::string message, int i);
-	std::string	_sendToAllUsers(Channel *channel, int senderFd, std::string message);
+	std::string	_sendToAllUsers( Channel *channel, int senderFd, std::string message);
 	std::string	_getPassword() const;
 
 public:
 	Server(std::string Name, int max_online, std::string Port, std::string Password);
 	Server(const Server & x);
 	~Server();
-	Server & operator=(const Server & rhs);
-	void	startServer(void);
+	Server & operator=( const Server & rhs );
+	void startServer(void);
 };
 
 #include "Channel.hpp"
