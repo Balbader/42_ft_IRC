@@ -5,10 +5,10 @@ std::string	Server::_parsing(std::string message, int i) {
 	// Initiate a 'request' object which parses the input message
 	Request	request(_splitRequest(message));
 
-    std::cout << "Message: " << message << std::endl;
+    // std::cout << "Message: " << message << std::endl;
 	if (request.invalidMessage)
 		return ("Invalid message!\n");
-    std::cout << "cmd pars = " << request.command << std::endl;
+    // std::cout << "cmd pars = " << request.command << std::endl;
 	if (request.command == "PASS")
 		return (_setPassWord(request, i)); // sets the password for a session or connection
 	else if (request.command == "NICK")
