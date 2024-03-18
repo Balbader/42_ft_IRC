@@ -150,7 +150,6 @@ std::string Server::_printUserModes(std::string ret, int i) {
     }
 
     ret.append(ss.str());
-	// BUG: in case the client's mode is 's', need to append "\n"
     return ret;
 }
 
