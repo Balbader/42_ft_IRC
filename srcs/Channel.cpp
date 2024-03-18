@@ -159,14 +159,14 @@ std::pair<Client*, int> Channel::findUserRole(int i) {
 
 	it = this->_operators.find(i);
 	if (it != this->_operators.end())
-		return (std::pair<Client *, int>(it->second, 1));
+		return (std::pair<Client*, int>(it->second, 1));
 
 	it = this->_voice.find(i);
 	if (it != this->_voice.end())
-		return (std::pair<Client *, int>(it->second, 2));
+		return (std::pair<Client*, int>(it->second, 2));
 
 	// if not found
-	return (std::pair<Client *, int>(NULL, -1));
+	return (std::pair<Client*, int>(NULL, -1));
 }
 
 // Compiles a single string  that lists all users in a channel distinguishing
@@ -175,7 +175,7 @@ std::string	Channel::listAllUsers() const {
 
 	std::string	AllUsers(":");
 
-	std::map<int, Client *>::const_iterator it = this->_operators.begin();
+	std::map<int, Client*>::const_iterator it = this->_operators.begin();
 	while (it != this->_operators.end()) {
 		// iterate over _operators map
 		// "@" for operators
