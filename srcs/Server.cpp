@@ -71,10 +71,11 @@ void Server::_newClient(void) {
 	else {
         _addToPoll(newfd); // Add the new client to the poll array
 
-//        std::string welcome = _welcomemsg();
+       std::string welcome = _welcomemsg();
 //       if (!welcome.empty()) {
 //            sendClient(newfd, welcome); // Send a welcome message to the client
  //       }
+        std::cout << "[server]: " << newfd << " sent this request :\n" << welcome<< "\n" << std::endl;
 
         // Logging the new connection
         char ipstr[INET6_ADDRSTRLEN];
