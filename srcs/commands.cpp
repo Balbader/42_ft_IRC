@@ -348,7 +348,7 @@ std::string	Server::_printHelpInfo() {
 	helpInfo.append(GREEN);
 	helpInfo.append("STEP 3: USER\n");
 	helpInfo.append(RESET);
-	helpInfo.append("\tUse USER command to register your username and fullname.e.g: USER [userName] * * :first last\n\n");
+	helpInfo.append("\tUse USER command to register your username and fullname.e.g: USER [userName] * 0 :first last\n\n");
 
 	return (helpInfo);
 }
