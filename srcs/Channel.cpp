@@ -44,9 +44,9 @@ int	const &Channel::getOnlineUsers() const { return this->_onlineUsers; }
 std::string	const &Channel::getName() const { return this->_name; }
 std::string	const &Channel::getKey() const { return this->_key; }
 std::string	const &Channel::getTopic() const { return this->_topic; }
-std::map<int, Client *>	const &Channel::getMembers() const { return this->_members; }
-std::map<int, Client *>	const &Channel::getOperators() const { return this->_operators; }
-std::map<int, Client *>	const &Channel::getVoice() const { return this->_voice; }
+std::map<int, Client*>	const &Channel::getMembers() const { return this->_members; }
+std::map<int, Client*>	const &Channel::getOperators() const { return this->_operators; }
+std::map<int, Client*>	const &Channel::getVoice() const { return this->_voice; }
 
 Client*	Channel::getCreator() const { return (this->_creator); }
 
