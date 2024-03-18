@@ -43,6 +43,9 @@ void Server::_ClientRequest(int i) {
 }
 
 // Parse a raw request string from a client and organize the data into a structured 'Request' object.
+// FIX: need to add a condition in regards '\n' as irssi requests are a bit funky compared to nc
+// it seems that the return messages are not parsed correctly and when a connection is attempted in irssi,
+// the server sends back serveral confirmation messages at the same time
 Request	Server::_splitRequest(std::string req)
 {
 	// init request
