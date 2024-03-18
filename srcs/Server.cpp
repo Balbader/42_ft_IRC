@@ -37,7 +37,7 @@ std::string	Server::_printMessage(std::string num, std::string nickname, std::st
 	if (nickname.empty())
 		nickname = "*";
 
-	return (":" + this->_name + " " + num + " " + nickname + " " + message + "\n");
+	return (":" + this->_name + " " + num + " " + nickname + " " + message + "\r\n");
 }
 
 void sendClient(int fd_client, std::string msg) {
