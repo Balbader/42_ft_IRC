@@ -132,7 +132,7 @@ bool Server::_validMode(Request request) {
 		return false;
 
 	// check if c is valid mode
-	if (c != 'a' && c != 'i' && c != 'w' && c != 'r' && c != 'o' && c != 'O' && c != 's')
+	if (c != 'i' && c != 't' && c != 'k' && c != 'o' && c != 'l')
 		return false;
 
 	return true;
@@ -140,7 +140,7 @@ bool Server::_validMode(Request request) {
 
 // append user mode to a string and returns it
 std::string Server::_printUserModes(std::string ret, int i) {
-    char modes[] = {'a', 'i', 'w', 'r', 'o', 'O', 's'};
+    char modes[] = {'i', 't', 'k', 'o', 'l'};
     std::stringstream ss;
 
     for (long unsigned int j = 0; j < sizeof(modes) / sizeof(modes[0]); ++j) {
