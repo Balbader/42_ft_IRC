@@ -8,7 +8,7 @@ std::string	Server::_parsing(std::string message, int i) {
     std::cout << "Message: " << message << std::endl;
 	if (request.invalidMessage)
 		return ("Invalid message!\n");
-
+    std::cout << "cmd pars = " << request.command << std::endl;
 	if (request.command == "PASS")
 		return (_setPassWord(request, i)); // sets the password for a session or connection
 	else if (request.command == "NICK")
@@ -35,7 +35,9 @@ std::string	Server::_parsing(std::string message, int i) {
 		return (_part(request, i)); // Leaves a channel
 	else if (request.command == "QUIT")
 		return (_quit(request, i)); // Disconnects from the server
-	else
+    else if (request.command == "CAP")
+        return ("CAP LS");
+    else
 		return ("Invalid command\n");
 }
 
