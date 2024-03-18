@@ -9,7 +9,7 @@ int main(int ac, char **av)
 
 	// Instanciate a Server object 'srv' name HOMESWEETHOME, with a max of 10 channels
 	// wiht command line arguments for port and password
-	Server srv("HOMESWEETHOME", 10, av[1], av[2]);
+	Server srv("SERVER", 10, av[1], av[2]);
 
 	try {
 		srv.startServer();
