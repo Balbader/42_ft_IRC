@@ -8,16 +8,16 @@ Channel::Channel()
 Channel::Channel( const Channel& x ) { *this = x; }
 
 // Constructor overload
-Channel::Channel(std::string channelName, Client *Creator)
+Channel::Channel(std::string channelName, Client* Creator)
 		: _prefix(), _creator(Creator), _onlineUsers(1), _name(channelName), _key(), _topic(), _members(), _operators(), _voice(), _banned()
 {
-	this->_operators.insert(std::pair<int, Client *>(Creator->getClientfd(), Creator));
+	this->_operators.insert(std::pair<int, Client*>(Creator->getClientfd(), Creator));
 }
 
 Channel::Channel(std::string channelName, std::string channelKey, Client *Creator)
 		: _prefix(), _creator(Creator), _onlineUsers(1), _name(channelName), _key(channelKey), _topic(), _members(), _operators(), _voice(), _banned()
 {
-	this->_operators.insert(std::pair<int, Client *>(Creator->getClientfd(), Creator));
+	this->_operators.insert(std::pair<int, Client*>(Creator->getClientfd(), Creator));
 }
 
 // Destructor
