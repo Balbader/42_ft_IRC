@@ -40,14 +40,6 @@ std::string	Server::_printMessage(std::string num, std::string nickname, std::st
 	return (":" + this->_name + " " + num + " " + nickname + " " + message + "\r\n");
 }
 
-void sendClient(int fd_client, std::string msg) {
-
-    std::cout << "[server]: " << fd_client << " sent this request :\n" << msg << "\n" << std::endl;
-
-    if (send(fd_client, msg.c_str(), msg.length(), 0) == -1)
-        std::cout << "send() error: " << strerror(errno) << std::endl;
-}
-
 // handle new client connection
 // accepts the connection
 // updates the poll array
@@ -76,6 +68,8 @@ void Server::_newClient(void) {
 //            sendClient(newfd, welcome); // Send a welcome message to the client
  //       }
         std::cout << "[server]: " << newfd << " sent this request :\n" << welcome<< "\n" << std::endl;
+        if (send(newfd, welcome.c_str(), welcome.length(), 0) == -1)
+            std::cout << "send() error: " << strerror(errno) << std::endl;
 
         // Logging the new connection
         char ipstr[INET6_ADDRSTRLEN];
