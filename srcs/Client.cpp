@@ -46,6 +46,8 @@ int	Client::getClientfd() const { return (this->_clientfd); }
 int	Client::getRegistered() const { return (this->_Registered); }
 int	Client::getisOperator() const { return (this->_isOperator); }
 
+
+// FIX: need to check the mode as theses are for users and not for chanels
 int	Client::getMode(char mode) const {
 	if (mode == 'a')
 		return this->_modes.away;
@@ -181,35 +183,23 @@ std::string	Client::getUserInfo() const {
 // the creator of the channel,
 // and the channel's topic
 std::string	Client::getAllChannels() const {
-
-	std::string channels(YELLOW "███████████████████████████████████████████████████████████████████████████████████████\n");
-	channels.append("█              █              █                    █                                  █\n");
-	channels.append("█" RESET " Channel Name " YELLOW "█ " RESET "Online Users " YELLOW "█ " RESET "Creator Of Channel " YELLOW "█ " RESET "          Channel Topic          " YELLOW "█\n");
-	channels.append("█              █              █                    █                                  █\n");
-	channels.append("███████████████████████████████████████████████████████████████████████████████████████\n");
-
+	std::string channels(RESET " Channel Name " YELLOW "█ " RESET "Online Users " YELLOW "█ " RESET "Creator Of Channel " YELLOW "█ " RESET "          Channel Topic          " YELLOW "█\n");
 	std::map<std::string, Channel*>::const_iterator it = this->_joinedChannels.begin();
     std::stringstream ss;
     ss << it->second->getOnlineUsers();
     std::string size = ss.str();
 
 	while (it != this->_joinedChannels.end()) {
-		channels.append("█              █              █                    █                                  █\n");
-		channels.append("█ " RESET + fillIt(it->first, 12));
-		channels.append(YELLOW " █      " RESET + fillIt(size, 7));
-		channels.append(YELLOW " █ " RESET + fillIt(it->second->getCreator()->getFullName(), 18));
-		channels.append(YELLOW " █ " RESET + fillIt(it->second->getTopic(), 32));
-		channels.append(YELLOW " █\n");
-		channels.append(YELLOW "█              █              █                    █                                  █\n");
-		channels.append("███████████████████████████████████████████████████████████████████████████████████████\n");
+		channels.append( RESET + fillIt(it->first, 12));
+		channels.append(RESET + fillIt(size, 7));
+		channels.append(RESET + fillIt(it->second->getCreator()->getFullName(), 18));
+		channels.append(RESET + fillIt(it->second->getTopic(), 32));
+		channels.append("\n");
 		it++;
 	}
 
 	if (this->_joinedChannels.size() == 0) {
-		channels.append("█                                                                                     █\n");
-		channels.append("█                       " RESET "YOU JOINED NO CHANNEL" YELLOW "                      █\n");
-		channels.append("█                                                                                     █\n");
-		channels.append("███████████████████████████████████████████████████████████████████████████████████████\n");
+		channels.append( RESET "YOU JOINED NO CHANNEL\n");
 	}
 
 	channels.append(RESET "\n\n");
