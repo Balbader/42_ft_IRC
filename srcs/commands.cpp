@@ -5,7 +5,7 @@ std::string	Server::_parsing(std::string message, int i) {
 	// Initiate a 'request' object which parses the input message
 	Request	request(_splitRequest(message));
 
-    // NOTE: need to add "INVITE" command
+    // NOTE: need to add "INVITE", "PING", "PONG" command
 
 	if (request.invalidMessage)
 		return ("Invalid message!\n");
