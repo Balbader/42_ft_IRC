@@ -1,4 +1,5 @@
 #pragma once
+
 #define	USERALREADYJOINED 0
 #define USERISJOINED 1
 #define NOTINCHANNEL 2
