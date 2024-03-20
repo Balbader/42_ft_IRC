@@ -190,7 +190,7 @@ std::string	Client::getAllChannels() const {
     std::string size = ss.str();
 
 	while (it != this->_joinedChannels.end()) {
-		channels.append( RESET + fillIt(it->first, 12));
+		channels.append(RESET + fillIt(it->first, 12));
 		channels.append(RESET + fillIt(size, 7));
 		channels.append(RESET + fillIt(it->second->getCreator()->getFullName(), 18));
 		channels.append(RESET + fillIt(it->second->getTopic(), 32));
