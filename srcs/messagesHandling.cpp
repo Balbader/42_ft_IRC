@@ -18,10 +18,11 @@ int	Server::_sendall(int destfd, std::string message) {
 
 
 	// print to console the descriptor of the destination and the message that is being sent
-    std::cout << "[server]: " << destfd << " _sendall : " << message << std::endl;
+    // std::cout << "[server]: " << destfd << " _sendall : " << message << std::endl;
 
 	while (total < (int)message.length()) {
 		b = send(destfd, message.c_str() + total, bytesleft, 0);
+        std::cout << "[server]: " << destfd << " _sendall : " << message << std::endl;
 
 		if (b == -1) // if an error has occured
             break;
