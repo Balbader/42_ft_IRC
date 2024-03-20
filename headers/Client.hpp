@@ -9,6 +9,7 @@
 # define PURPLE "\e[1;35m"
 # define BLUE "\e[1;34m"
 
+// FIX: replace the following User modes by Channel modes
 struct Modes {
 	bool away;
 	bool invisible;
