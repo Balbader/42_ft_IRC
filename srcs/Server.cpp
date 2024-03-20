@@ -63,10 +63,8 @@ void Server::_newClient(void) {
 	else {
         _addToPoll(newfd); // Add the new client to the poll array
 
-       std::string welcome = _welcomemsg();
-//       if (!welcome.empty()) {
-//            sendClient(newfd, welcome); // Send a welcome message to the client
- //       }
+        std::string welcome = _welcomemsg();
+
         std::cout << "[server]: " << newfd << " sent this request :\n" << welcome<< "\n" << std::endl;
         if (send(newfd, welcome.c_str(), welcome.length(), 0) == -1)
             std::cout << "send() error: " << strerror(errno) << std::endl;
