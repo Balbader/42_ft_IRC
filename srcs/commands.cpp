@@ -36,7 +36,7 @@ std::string	Server::_parsing(std::string message, int i) {
 	else if (request.command == "QUIT")
 		return (_quit(request, i)); // Disconnects from the server
     else if (request.command == "CAP")
-        return ("CAP * LS :multi-prefix\r\n");
+        return ("CAP * LS : multi-prefix\r\n");
     else
 		return ("Invalid command\r\n");
 }
