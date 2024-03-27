@@ -1,4 +1,5 @@
 #include "../headers/Server.hpp"
+#include <cstdio>
 
 std::string	Server::_parsing(std::string message, int i) {
 
@@ -36,9 +37,9 @@ std::string	Server::_parsing(std::string message, int i) {
 	else if (request.command == "QUIT")
 		return (_quit(request, i)); // Disconnects from the server
     else if (request.command == "CAP")
-        return ("CAP * LS : multi-prefix\r\n");
+        return ("CAP * LS :none\r\n");
     else
-		return ("Invalid command\r\n");
+		return ("Invalid command");
 }
 
 
@@ -215,6 +216,7 @@ std::string	Server::_setOper(Request request, int i) {
 // handle password setting or Validation Process for a client trying to
 // register or authenticate with the server
 std::string	Server::_setPassWord(Request request, int i) {
+    printf("hello from _setPassWord");
 	if (request.args.size() < 1) // check if at least one argument is provided
 		return (_printMessage("461", this->_clients[i]->getNickName(), "PASS :Not enough parameters"));
 
