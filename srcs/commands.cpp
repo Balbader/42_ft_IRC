@@ -36,7 +36,7 @@ std::string	Server::_parsing(std::string message, int i) {
 		return (_part(request, i)); // Leaves a channel
 	else if (request.command == "QUIT")
 		return (_quit(request, i)); // Disconnects from the server
-    else if (request.command == "CAP")
+    else if (request.command == "CAP") // FIX: need to create a function that
         return ("CAP * LS :none\r\n");
     else
 		return ("Invalid command");
