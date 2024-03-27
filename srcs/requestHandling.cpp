@@ -25,7 +25,31 @@ void Server::_ClientRequest(int i) {
 
 	else {
 		std::string message(buf, strlen(buf) - 1);
-        std::cout << "message : " << message << std::endl;
+        std::cout << "received message : " << message << std::endl;
+        // Pulga Edit How to split the blocks?
+        //
+        // Save each line in a vector using a n istringstream
+        // istringstream supports tokenization of default line... i think
+        //
+        // std::vector<std::string> lines;
+        // std::string line;
+        // std::istringstream iss(message.substr(message.find_first_of("\r\n")));
+        // std::map<int, std::string> || std::map<int, Client>
+        //
+        // when msg recv on the server:
+        //
+        // read messge comming from sender_fd
+        // join the message with the map current data
+        // if is not end
+        //   map[sender_fd].append(buf)
+        // else if is end
+        //   parse(map[sender_fd])
+        //
+        // while (iss >> line)
+        //     lines.push_back(line);
+        // for(std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); ++it)
+        //     std::cout << "->" << *it << std::endl;
+        // EOPC (End of pulga comment)
 
 		if (message[message.size() - 1] == '\r')
 			message.erase(message.end() - 1);
@@ -35,13 +59,10 @@ void Server::_ClientRequest(int i) {
         // ouvrir une boucle qui s'arrete quand le tableau est fini
         // a chaque iteration => reste du code
 		std::string ret = _parsing(message, this->_pfds[i].fd);
-        std::cout << "ret : " << ret << std::endl;
 
-        // std::cout << "[server]: " << sender_fd << " _ClientRequest :" << message << std::endl;
+        // std::cout << "[server]: " << sender_fd << " _ClientRequest :" << message << "[EOM]" << std::endl;
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
-        // if (ret == "CAP LS")
-        //     return ;
 	}
 
 	// clear & reset buffer for next request
