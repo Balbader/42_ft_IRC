@@ -25,17 +25,19 @@ void Server::_ClientRequest(int i) {
 
 	else {
 		std::string message(buf, strlen(buf) - 1);
+        std::cout << "message : " << message << std::endl;
 
 		if (message[message.size() - 1] == '\r')
 			message.erase(message.end() - 1);
 
 		// parse the client's request
-        // split "message" et creer un tableau de string splitees selon \n
+        // FIX: split "message" et creer un tableau de string splitees selon \n
         // ouvrir une boucle qui s'arrete quand le tableau est fini
         // a chaque iteration => reste du code
 		std::string ret = _parsing(message, this->_pfds[i].fd);
-        std::cout << "ret :::: " << ret << std::endl;
-        std::cout << "[server]: " << sender_fd << " _ClientRequest :" << message << std::endl;
+        std::cout << "ret : " << ret << std::endl;
+
+        // std::cout << "[server]: " << sender_fd << " _ClientRequest :" << message << std::endl;
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
         // if (ret == "CAP LS")
@@ -47,9 +49,6 @@ void Server::_ClientRequest(int i) {
 }
 
 // Parse a raw request string from a client and organize the data into a structured 'Request' object.
-// FIX: need to add a condition in regards '\n' as irssi requests are a bit funky compared to nc
-// it seems that the return messages are not parsed correctly and when a connection is attempted in irssi,
-// the server sends back serveral confirmation messages at the same time
 Request	Server::_splitRequest(std::string req)
 {
 	// init request
