@@ -1,12 +1,13 @@
 #include "../headers/Server.hpp"
 
 std::string	Server::_welcomemsg(void) {
-	std::string welcome = RED;
+	// std::string welcome = RED;
+	std::string welcome;
 
 	welcome.append("Welcome young padawan!\n");
-	welcome.append(BLUE);
-	welcome.append("You need to login so you can start chatting OR you can send HELP to see how :) \n");
-	welcome.append(RESET);
+	// welcome.append(BLUE);
+	// welcome.append("You need to login so you can start chatting OR you can send HELP to see how :) \n");
+	// welcome.append(RESET);
 
 	return (welcome);
 }
