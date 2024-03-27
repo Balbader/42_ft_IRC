@@ -30,12 +30,16 @@ void Server::_ClientRequest(int i) {
 			message.erase(message.end() - 1);
 
 		// parse the client's request
+        // split "message" et creer un tableau de string splitees selon \n
+        // ouvrir une boucle qui s'arrete quand le tableau est fini
+        // a chaque iteration => reste du code
 		std::string ret = _parsing(message, this->_pfds[i].fd);
+        std::cout << "ret :::: " << ret << std::endl;
         std::cout << "[server]: " << sender_fd << " _ClientRequest :" << message << std::endl;
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
-        if (ret == "CAP LS")
-            return ;
+        // if (ret == "CAP LS")
+        //     return ;
 	}
 
 	// clear & reset buffer for next request
