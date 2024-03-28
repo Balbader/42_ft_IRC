@@ -1,25 +1,11 @@
 #include "../headers/Server.hpp"
 #include "../headers/Client.hpp"
 
-// std::string	Server::_welcomemsg(Client clients) {
-// 	std::string welcome;
-
-// 	welcome.append("001");
-//     welcome.append(" " + clients.getNickName());
-// 	welcome.append(" :Welcome young padawan!\r\n");
-
-// 	return (welcome);
-// }
-
 std::string	Server::_welcomemsg(void) {
 
 	std::string welcome;
 
-	// welcome.append("001 ");
-	// welcome.append(this->_name);
-	// welcome.append(" :Welcome to the Internet Relay Network ");
-	// welcome.append(this->_name);
-	welcome.append(" Welcome!\r\n");
+	welcome.append("\r\n");
 
 	return (welcome);
 }
