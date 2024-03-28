@@ -22,6 +22,8 @@ std::string	Server::_parsing(std::string message, int i) {
 		return (_setMode(request, i)); // set a mode for user or channel
 	else if (request.command == "PRIVMSG")
 		return (_privmsg(request, i)); // send private message to user or channel
+	else if (request.command == "INVITE")
+		return (_privmsg(request, i)); // send private message to user or channel // FIX: need to create a _inviteToChannel() function
 	else if (request.command == "NOTICE")
 		return (_notice(request, i)); // sends notice to a user or a channel
 	else if (request.command == "HELP")
@@ -41,13 +43,20 @@ std::string	Server::_parsing(std::string message, int i) {
     else if (request.command == "CAP END")
         return (_doNothing(request, i));
     else if (request.command == "PING")
-        return (_doNothing(request, i));
+        return (_handlePing(request, i));
     else if (request.command == "WHO")
         return (_doNothing(request, i));
     else if (request.command == "WHOIS")
         return (_doNothing(request, i));
     else
-		return ("Invalid command");
+		return ("\r\n");
+}
+
+std::string Server::_handlePing(Request request, int i) {
+    (void) request;
+    (void) i;
+	std::string pongResponse = "PONG " + this->_name + " :localhost";
+    return pongResponse;
 }
 
 std::string Server::_doNothing(Request request, int i) {
@@ -284,8 +293,7 @@ std::string	Server::_setNickName(Request request, int i) {
 		// set client as registered
 		this->_clients[i]->setRegistered(true);
 
-		// return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
-		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getNickName()));
+		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
 	}
 
 	// if user dont have a username
@@ -312,8 +320,7 @@ std::string	Server::_setUserName(Request request, int i) {
 	if (this->_clients[i]->getNickName() != "") {
 		this->_clients[i]->setID(this->_clients[i]->getNickName() + "!" + this->_clients[i]->getUserName() + "@" + this->_clients[i]->getHost());
 		this->_clients[i]->setRegistered(true);
-		// return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
-		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getNickName()));
+		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
 	}
 
 	return ("");
