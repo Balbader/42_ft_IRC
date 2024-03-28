@@ -1,4 +1,24 @@
 #include "../headers/Server.hpp"
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <string>
+
+std::vector<std::string> split(const std::string &src, const std::string &sep) {
+  
+  std::string str = src;
+  std::vector<std::string> split_str;
+  std::string element;
+  size_t pos = 0;
+  while (( pos = str.find(sep)) != std::string::npos) {
+    element = str.substr(0, pos);
+    split_str.push_back(element);
+    str.erase(0, pos + sep.length());
+  }
+
+  split_str.push_back(str);
+  return (split_str);
+}
 
 // Handle reception and process of client request, managing client connections
 void Server::_ClientRequest(int i) {
@@ -25,31 +45,7 @@ void Server::_ClientRequest(int i) {
 
 	else {
 		std::string message(buf, strlen(buf) - 1);
-        // std::cout << "received message : " << message << std::endl;
-        // Pulga Edit How to split the blocks?
-        //
-        // Save each line in a vector using a n istringstream
-        // istringstream supports tokenization of default line... i think
-        //
-        // std::vector<std::string> lines;
-        // std::string line;
-        // std::istringstream iss(message.substr(message.find_first_of("\r\n")));
-        // std::map<int, std::string> || std::map<int, Client>
-        //
-        // when msg recv on the server:
-        //
-        // read messge comming from sender_fd
-        // join the message with the map current data
-        // if is not end
-        //   map[sender_fd].append(buf)
-        // else if is end
-        //   parse(map[sender_fd])
-        //
-        // while (iss >> line)
-        //     lines.push_back(line);
-        // for(std::vector<std::string>::const_iterator it = lines.begin(); it != lines.end(); ++it)
-        //     std::cout << "->" << *it << std::endl;
-        // EOPC (End of pulga comment)
+        std::vector<std::string> split_msg = split(message, "\r\n");
 
 		if (message[message.size() - 1] == '\r')
 			message.erase(message.end() - 1);
@@ -58,12 +54,14 @@ void Server::_ClientRequest(int i) {
         // FIX: split "message" et creer un tableau de string splitees selon \n
         // ouvrir une boucle qui s'arrete quand le tableau est fini
         // a chaque iteration => reste du code
-		std::string ret = _parsing(message, this->_pfds[i].fd);
-        std::cout << "[ret]:" << ret << "[EOM]" << std::endl;
+        for (std::vector<std::string>::iterator it = split_msg.begin() ; it != split_msg.end() ; it++) {
+		    std::string ret = _parsing(*it, this->_pfds[i].fd);
+        // std::cout << "[ret]:" << ret << "[EOM]" << std::endl;
 
-        std::cout << "[client]: " << sender_fd << " : " << message << "[EOM]" << std::endl;
-		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
-			std::cout << "send() error: " << strerror(errno) << std::endl;
+            std::cout << "[client]: " << sender_fd << " : " << *it << "[EOM]" << std::endl;
+		    if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
+			    std::cout << "send() error: " << strerror(errno) << std::endl;
+        }
 	}
 
 	// clear & reset buffer for next request
