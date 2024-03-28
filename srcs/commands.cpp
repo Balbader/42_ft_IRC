@@ -36,12 +36,25 @@ std::string	Server::_parsing(std::string message, int i) {
 		return (_part(request, i)); // Leaves a channel
 	else if (request.command == "QUIT")
 		return (_quit(request, i)); // Disconnects from the server
-    else if (request.command == "CAP") // FIX: need to create a function that
+    else if (request.command == "CAP LS")
         return ("CAP * LS :none\r\n");
+    else if (request.command == "CAP END")
+        return (_doNothing(request, i));
+    else if (request.command == "PING")
+        return (_doNothing(request, i));
+    else if (request.command == "WHO")
+        return (_doNothing(request, i));
+    else if (request.command == "WHOIS")
+        return (_doNothing(request, i));
     else
 		return ("Invalid command");
 }
 
+std::string Server::_doNothing(Request request, int i) {
+    (void) request;
+    (void) i;
+    return ("");
+}
 
 // Handles the NOTICE command used to send a message to a specific user or channel
 // similar to PRIVMSG but should not generate any automatic reply
