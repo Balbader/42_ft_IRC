@@ -1,13 +1,21 @@
 #include "../headers/Server.hpp"
+#include "../headers/Client.hpp"
+
+// std::string	Server::_welcomemsg(Client clients) {
+// 	std::string welcome;
+
+// 	welcome.append("001");
+//     welcome.append(" " + clients.getNickName());
+// 	welcome.append(" :Welcome young padawan!\r\n");
+
+// 	return (welcome);
+// }
 
 std::string	Server::_welcomemsg(void) {
-	// std::string welcome = RED;
+
 	std::string welcome;
 
-	welcome.append("Welcome young padawan!\n");
-	// welcome.append(BLUE);
-	// welcome.append("You need to login so you can start chatting OR you can send HELP to see how :) \n");
-	// welcome.append(RESET);
+	welcome.append("001 baalbade :Welcome young padawan!\r\n");
 
 	return (welcome);
 }
@@ -19,7 +27,7 @@ int	Server::_sendall(int destfd, std::string message) {
 
 
 	// print to console the descriptor of the destination and the message that is being sent
-    // std::cout << "[server]: " << destfd << " _sendall : " << message << std::endl;
+    std::cout << "[server]: " << destfd << " _sendall : " << message << std::endl;
 
 	while (total < (int)message.length()) {
 		b = send(destfd, message.c_str() + total, bytesleft, 0);
