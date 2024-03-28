@@ -284,7 +284,8 @@ std::string	Server::_setNickName(Request request, int i) {
 		// set client as registered
 		this->_clients[i]->setRegistered(true);
 
-		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
+		// return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
+		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getNickName()));
 	}
 
 	// if user dont have a username
@@ -311,7 +312,8 @@ std::string	Server::_setUserName(Request request, int i) {
 	if (this->_clients[i]->getNickName() != "") {
 		this->_clients[i]->setID(this->_clients[i]->getNickName() + "!" + this->_clients[i]->getUserName() + "@" + this->_clients[i]->getHost());
 		this->_clients[i]->setRegistered(true);
-		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
+		// return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
+		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getNickName()));
 	}
 
 	return ("");
