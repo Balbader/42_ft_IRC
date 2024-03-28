@@ -41,7 +41,6 @@ private:
 
 	Server();
 	std::string	_welcomemsg(void);
-	// std::string	_welcomemsg(Client _clients);
 	void _getSocket(std::string Port);
 	void _addToPoll(int newfd);
 	void _removeFromPoll(int i);
@@ -49,6 +48,7 @@ private:
 	void _ClientRequest(int i);
 	int	_sendall(int destfd, std::string message);
 	void _broadcastmsg(int sender_fd, std::string buf, int nbytes);
+    std::string _handlePing(Request request, int i);
     std::string _doNothing(Request request, int i);
 	std::string	_setUserName(Request request, int i);
 	std::string	_setNickName(Request request, int i);
