@@ -56,7 +56,7 @@ void Server::_ClientRequest(int i) {
         // a chaque iteration => reste du code
         for (std::vector<std::string>::iterator it = split_msg.begin() ; it != split_msg.end() ; it++) {
 		    std::string ret = _parsing(*it, this->_pfds[i].fd);
-        // std::cout << "[ret]:" << ret << "[EOM]" << std::endl;
+            std::cout << "[ret]:" << ret << "[EOM]" << std::endl;
 
             std::cout << "[client]: " << sender_fd << " : " << *it << "[EOM]" << std::endl;
 		    if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
