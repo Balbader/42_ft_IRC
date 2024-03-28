@@ -6,7 +6,6 @@ std::string	Server::_parsing(std::string message, int i) {
 	// Initiate a 'request' object which parses the input message
 	Request	request(_splitRequest(message));
 
-    // NOTE: need to add "INVITE", "PING", "PONG" command
 
 	if (request.invalidMessage)
 		return ("Invalid message!\n");
@@ -55,7 +54,7 @@ std::string	Server::_parsing(std::string message, int i) {
 std::string Server::_handlePing(Request request, int i) {
     (void) request;
     (void) i;
-	std::string pongResponse = "PONG " + this->_name + " :localhost";
+	std::string pongResponse = "PONG " + this->_name;
     return pongResponse;
 }
 
