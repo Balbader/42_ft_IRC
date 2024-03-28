@@ -60,7 +60,7 @@ std::string	Server::_joinChannel( Request request, int i ) {
 	--itChannels;
 
 	// if success return empty string
-	return ("");
+	return ("JOIN"); //FIX: check server response 
 }
 
 int	Server::_createChannel(std::string ChannelName, int CreatorFd) {
