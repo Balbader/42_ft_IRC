@@ -15,9 +15,11 @@ std::string	Server::_welcomemsg(void) {
 
 	std::string welcome;
 
-	welcome.append("001 ");
-	welcome.append(this->_name);
-	welcome.append(" :Welcome young padawan!\r\n");
+	// welcome.append("001 ");
+	// welcome.append(this->_name);
+	// welcome.append(" :Welcome to the Internet Relay Network ");
+	// welcome.append(this->_name);
+	welcome.append(" Welcome!\r\n");
 
 	return (welcome);
 }
