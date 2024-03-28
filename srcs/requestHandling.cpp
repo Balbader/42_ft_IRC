@@ -25,7 +25,7 @@ void Server::_ClientRequest(int i) {
 
 	else {
 		std::string message(buf, strlen(buf) - 1);
-        std::cout << "received message : " << message << std::endl;
+        // std::cout << "received message : " << message << std::endl;
         // Pulga Edit How to split the blocks?
         //
         // Save each line in a vector using a n istringstream
@@ -59,8 +59,9 @@ void Server::_ClientRequest(int i) {
         // ouvrir une boucle qui s'arrete quand le tableau est fini
         // a chaque iteration => reste du code
 		std::string ret = _parsing(message, this->_pfds[i].fd);
+        std::cout << "[ret]:" << ret << "[EOM]" << std::endl;
 
-        // std::cout << "[server]: " << sender_fd << " _ClientRequest :" << message << "[EOM]" << std::endl;
+        std::cout << "[client]: " << sender_fd << " : " << message << "[EOM]" << std::endl;
 		if (send(sender_fd, ret.c_str(), ret.length(), 0) == -1)
 			std::cout << "send() error: " << strerror(errno) << std::endl;
 	}
