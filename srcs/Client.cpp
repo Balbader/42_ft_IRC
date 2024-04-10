@@ -2,22 +2,22 @@
 
 // constructors
 Client::Client() {
-	this->fd		   = 0;
+	this->fd = 0;
 	this->registration = 0;
-	this->flags		   = CLI_INV | CLI_WALLOP | CLI_NOTICE;
+	this->flags = CLI_INV | CLI_WALLOP | CLI_NOTICE;
 	this->knowPassword = false;
-	this->welcome	   = false;
+	this->welcome = false;
 	this->toDisconnect = false;
 }
 
 Client::Client(int fd, std::string hostname) {
-	this->fd		   = fd;
+	this->fd = fd;
 	this->registration = 0;
-	this->flags		   = CLI_INV | CLI_WALLOP | CLI_NOTICE;
+	this->flags = CLI_INV | CLI_WALLOP | CLI_NOTICE;
 	this->knowPassword = false;
-	this->welcome	   = false;
+	this->welcome = false;
 	this->toDisconnect = false;
-	this->hostname	   = hostname;
+	this->hostname = hostname;
 }
 
 // destructor
