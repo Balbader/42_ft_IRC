@@ -144,7 +144,7 @@ bool Channel::toggleMode(char mode, bool on) {
 
 void Channel::initialize(std::string name, std::string password, Client &op) {
 	LOGGER.info("initialize", "Initializing channel " + name);
-	this->name	   = name;
+	this->name = name;
 	this->password = password;
 	this->clients.insert(std::make_pair(&op, USER_OPERATOR));
 	this->initialized = true;
