@@ -33,11 +33,11 @@ Client::~Client() {
 
 
 // getters
-int			Client::getFd() const { return fd; }
-int			Client::getRegistration() const { return registration; }
-bool		Client::getWelcome() const { return welcome; }
-bool		Client::getToDisconnect() const { return toDisconnect; }
-bool		Client::getOp() const { return flags & CLI_OPER; }
+int	Client::getFd() const { return fd; }
+int	Client::getRegistration() const { return registration; }
+bool Client::getWelcome() const { return welcome; }
+bool Client::getToDisconnect() const { return toDisconnect; }
+bool Client::getOp() const { return flags & CLI_OPER; }
 std::string Client::getNickname() const { return nickname; }
 std::string Client::getUsername() const { return username; }
 std::string Client::getHostname() const { return hostname; }
