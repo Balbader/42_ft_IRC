@@ -44,6 +44,8 @@ std::string Client::getHostname() const { return hostname; }
 std::string Client::getSendData() const { return sendData; }
 std::string Client::getServername() const { return servername; }
 std::string Client::getRealname() const { return realname; }
+std::vector<Channel *> &Client::getChannels() { return channels; }
+
 std::string Client::getClientPrefix() {
 	std::stringstream ss;
 
@@ -52,7 +54,6 @@ std::string Client::getClientPrefix() {
 	ss << "@" << getHostname();
 	return (ss.str());
 };
-std::vector<Channel *> &Client::getChannels() { return channels; }
 
 std::string Client::getModesStr() const {
 	std::string modes = "";
