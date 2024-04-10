@@ -17,10 +17,10 @@
 #define OPER_USER "foo"
 #define OPER_PASS "bar"
 
-#define CLI_OPER 0b0001
-#define CLI_INV 0b0010
-#define CLI_WALLOP 0b0100
-#define CLI_NOTICE 0b1000
+#define CLI_OPER 0b0001 // 1 in decimal
+#define CLI_INV 0b0010 // 2 in decimal
+#define CLI_WALLOP 0b0100 // 4 in decimal
+#define CLI_NOTICE 0b1000 // 8 in decimal
 
 class Channel;
 
