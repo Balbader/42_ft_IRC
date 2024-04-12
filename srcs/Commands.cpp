@@ -131,7 +131,10 @@ void Server::join(Client &client, Command &command) {
 		client.setSendData(needmoreparams(client, "JOIN"));
 		return;
 	}
+
+    // logging the join attempt
 	LOGGER.info("join", "Client " + client.getNickname() + " is trying to join channel " + command.args[0]);
+
 	if (!validChannelName(command.args[0])) {
 		client.setSendData(nosuchchannel(client, command.args[0]));
 		return;
