@@ -1,32 +1,42 @@
 #include <Server.hpp>
 
 void Server::pass(Client &client, Command &command) {
+
+    // logging the authentication attempt
 	LOGGER.info("pass", "Client " + client.getNickname() + " is trying to authenticate");
+
+    // check for password arguments
 	if (command.args.size() == 0) {
 		client.setSendData(needmoreparams(client, "PASS"));
 		return;
-	} else if (client.getRegistration() & PASS_FLAG) {
+	} else if (client.getRegistration() & PASS_FLAG) { // check for previous authentication
 		client.setSendData(alreadyregistered(client));
 		return;
-	} else if (command.args[0] != passwd) {
+	} else if (command.args[0] != passwd) { // password validation
 		client.setSendData(passwdmismatch(client));
 		return;
 	}
 
+    // setting client as authenticated
 	client.setKnowPassword(true);
 	client.setRegistration(PASS_FLAG);
 }
 
 void Server::user(Client &client, Command &command) {
+
+    // logging the registration attempt
 	LOGGER.info("user", "Client " + client.getNickname() + " is trying registry username");
+
+    // check for sufficient arguments
 	if (command.args.size() < 4) {
 		client.setSendData(needmoreparams(client, "USER"));
 		return;
-	} else if (client.getRegistration() & USER_FLAG) {
+	} else if (client.getRegistration() & USER_FLAG) { // check for previous registration
 		client.setSendData(alreadyregistered(client));
 		return;
 	}
 
+    // set client details
 	client.setUsername(command.args[0]);
 	client.setHostname(command.args[1]);
 	client.setServername(command.args[2]);
@@ -35,41 +45,58 @@ void Server::user(Client &client, Command &command) {
 }
 
 void Server::nick(Client &client, Command &command) {
+
+    // logging the nickname change attempt
 	LOGGER.info("nick", "Client " + client.getNickname() + " is trying to change nickname");
+
+    // check for nickname argument
 	if (command.args.size() == 0) {
 		client.setSendData(nonicknamegiven(client));
 		return;
-	} else if (!validNickname(command.args[0])) {
+	} else if (!validNickname(command.args[0])) { // validate the new nickname
 		client.setSendData(erroneusnickname(client, command.args[0]));
 		return;
-	} else if (nicknameAlreadyExists(command.args[0])) {
+	} else if (nicknameAlreadyExists(command.args[0])) { // check for nickname uniqueness
 		client.setSendData(nicknameinuse(client, command.args[0]));
 		return;
 	}
+
+    // change the nickname
 	std::string oldNick = client.getNickname();
 	client.setNickname(command.args[0]);
+
+    // send confirmation
 	if (client.getRegistration() & NICK_FLAG) {
 		client.setSendData(":localhost 001 " + client.getNickname() + "\r\n");
 	} else {
 		client.setSendData(changednickname(client, client.getNickname()));
 	}
+
+    // update registration status
 	client.setRegistration(NICK_FLAG);
+
+    // logging the successful nickname change
 	LOGGER.info("nick", "Client " + client.getNickname() + " changed nickname");
 }
 
 void Server::oper(Client &client, Command &command) {
+
+    // logging the authentication attempt
 	LOGGER.info("oper", "Client " + client.getNickname() + " is trying to authenticate as operator");
+
+    // check for sufficient arguments
 	if (command.args.size() < 2) {
 		client.setSendData(needmoreparams(client, command.cmd));
 		return;
-	} else if (command.args[1] != OPER_PASS) {
+	} else if (command.args[1] != OPER_PASS) { // password validation
 		client.setSendData(passwdmismatch(client));
 		return;
-	} else if (command.args[0] != OPER_USER) {
+	} else if (command.args[0] != OPER_USER) { // username validation
 		client.setSendData(nooperhost(client));
 		return;
 	}
 
+    // granting operator mode
 	if (client.setMode('o', true)) {
 		client.setSendData(youreoper(client));
 	}
@@ -79,7 +106,10 @@ void Server::privmsg(Client &client, Command &command) {
 	std::stringstream ss;
 	std::string		  ch_prefix = CHANNEL_PREFIX;
 
+    // logging the message sending attempt
 	LOGGER.info("privmsg", "Client " + client.getNickname() + " is trying to send a privmsg");
+
+    // check for sufficient arguments
 	if (command.args.size() == 1) {
 		if (ch_prefix.find(command.args[0].at(0)) != std::string::npos)
 			return client.setSendData(norecipient(client, "PRIVMSG"));
@@ -91,6 +121,8 @@ void Server::privmsg(Client &client, Command &command) {
 		client.setSendData(needmoreparams(client, "PRIVMSG"));
 		return;
 	}
+
+    // constructing the message
 	ss << client.getClientPrefix();
 	ss << " PRIVMSG";
 	ss << " ";
@@ -99,6 +131,7 @@ void Server::privmsg(Client &client, Command &command) {
 	ss << command.args[1];
 	ss << "\r\n";
 
+    // message dellivery to a channel
 	if (ch_prefix.find(command.args[0].at(0)) != std::string::npos) {
 		std::map<std::string, Channel>::iterator it =
 			channels.find(toIrcUpperCase(command.args[0]));
@@ -112,7 +145,7 @@ void Server::privmsg(Client &client, Command &command) {
 			else
 				return ch.broadcast(client, ss.str(), false);
 		}
-	} else {
+	} else { // message delivery to a client
 		std::map<int, Client>::iterator it = clients.begin();
 
 		for (; it != clients.end(); it++) {
@@ -127,6 +160,8 @@ void Server::privmsg(Client &client, Command &command) {
 }
 
 void Server::join(Client &client, Command &command) {
+
+    // check for sufficient arguments
 	if (command.args.size() < 1) {
 		client.setSendData(needmoreparams(client, "JOIN"));
 		return;
@@ -135,13 +170,14 @@ void Server::join(Client &client, Command &command) {
     // logging the join attempt
 	LOGGER.info("join", "Client " + client.getNickname() + " is trying to join channel " + command.args[0]);
 
+    // validate channel name
 	if (!validChannelName(command.args[0])) {
 		client.setSendData(nosuchchannel(client, command.args[0]));
 		return;
 	}
 
+    // password handling
 	bool sentPassword = command.args.size() > 1;
-
 	if (sentPassword) {
 		bool v = validatePassword(command.args[1]);
 		if (!v) {
@@ -150,8 +186,8 @@ void Server::join(Client &client, Command &command) {
 		}
 	}
 
+    // channel initialization
 	Channel &ch = channels[toIrcUpperCase(command.args[0])];
-
 	if (!ch.isInitialized()) {
 		if (sentPassword) {
 			ch.initialize(command.args[0], command.args[1], client);
@@ -182,11 +218,12 @@ void Server::join(Client &client, Command &command) {
 	if (sentPassword) {
 		if (!ch.evalPassword(command.args[1]))
 			return client.setSendData(badchannelkey(client, ch.getName()));
-		
 	} else {
 		if (!ch.evalPassword(""))
 			return client.setSendData(badchannelkey(client, ch.getName()));
 	}
+
+    // successfulJoin ^^
 	successfulJoin(client, ch);
 }
 
@@ -688,6 +725,7 @@ void Server::kick(Client &client, Command &command) {
     // logging the kick attempt
 	LOGGER.info("kick", "Client " + client.getNickname() + " is trying to kick " + command.args[1] + " from channel " + command.args[0]);
 
+    // finding the channel
 	Channel *ch = NULL;
 	std::map<std::string, Channel>::iterator it = getChannelByName(command.args[0]);
 	if (it != channels.end()) {
@@ -697,12 +735,14 @@ void Server::kick(Client &client, Command &command) {
 		return client.setSendData(nosuchchannel(client, command.args[0]));
 	}
 
+    // finding the target client
 	std::map<Client *, unsigned int>::iterator target;
 	target = ch->getClientByNick(command.args[1]);
 	if (target == ch->getClients().end()) {
 		return client.setSendData(usernotinchannel(client, (*ch)));
 	}
 
+    // verifying the issuer's privileges
 	std::map<Client *, unsigned int>::iterator issuer;
 	issuer = ch->getClientByNick(client.getNickname());
 	if (issuer == ch->getClients().end()) {
@@ -710,47 +750,61 @@ void Server::kick(Client &client, Command &command) {
 	}
 	if (!(issuer->second & USER_OPERATOR))
 		return client.setSendData(chanoprivsneeded((*issuer->first), (*ch)));
+
+    // handling the kick reason
 	std::string targetName = target->first->getNickname();
 	std::string reason = client.getNickname();
 	if (command.args.size() > 2 && !command.args.at(2).empty()) {
 		reason = command.args.at(2).find(':') == 0 ? command.args.at(2).substr(1) : command.args.at(2);
 	}
+
+    // broadcasting the kick and removing the client
 	ch->broadcast(client, kicksuccess(client, *ch, targetName, reason), true);
 	ch->removeClient(*target->first);
 	return;
 }
 
 void Server::invite(Client &client, Command &command) {
+
+    // check command arguments
 	if (command.args.size() < 2) {
 		return client.setSendData(needmoreparams(client, "INVITE"));
 	}
+
+    // logging the invitation attempt
 	LOGGER.info("invite", "Client " + client.getNickname() + " is trying to invite " + command.args[0] + " to channel " + command.args[1]);
 	std::map<std::string, Channel>::iterator ch_it;
+
+    // finding the channel
 	ch_it = this->getChannelByName(command.args[1]);
 	if (ch_it == channels.end()) {
 		return client.setSendData(nosuchnick(client, command.args[1]));
 	}
 	Channel *chan = &ch_it->second;
 
+    // finding the terget client
 	Client *target = getClientByNick(command.args[0]);
 	if (target == NULL) {
 		return client.setSendData(nosuchnick(client, command.args[0]));
 	}
 
+    // checking the inviter's channel membership
 	std::map<Client *, unsigned int>::iterator issuer_it;
 	issuer_it = chan->getClientByNick(client.getNickname());
 	if (issuer_it == chan->getClients().end()) {
 		return client.setSendData(notonchannel(client, client.getNickname()));
 	}
 
+    // checking inviter's operator status
 	bool isOper = issuer_it->second & USER_OPERATOR;
 
+    // handling channel modes
 	std::set<char> &chanModes = chan->getMode();
-
 	if (chanModes.find('i') != chanModes.end() && !isOper) {
 		return client.setSendData(chanoprivsneeded(client, (*chan)));
 	}
 
+    // adding the invitation and notifying clients
 	chan->addInvite(target->getNickname());
 	client.setSendData(inviting(client, (*chan)));
 	return target->setSendData(inviterrpl(client, (*target), (*chan)));
