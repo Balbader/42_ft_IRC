@@ -22,7 +22,7 @@ Server::Server(std::string const &passwd, int const &port) {
 // destructor
 Server::~Server() {
 	for (std::vector<pollfd>::iterator it = pollFds.begin(); it != pollFds.end(); it++) {
-		if (fcntl((*it).fd, F_SETFL, O_NONBLOCK) == false) {
+		if (fcntl((*it).fd, F_SETFL, O_NONBLOCK) == -1) {
 			close((*it).fd);
 		}
     }
