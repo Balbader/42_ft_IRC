@@ -325,8 +325,7 @@ void Server::part(Client &client, Command &command) {
 	}
 	LOGGER.info("part", "Client " + client.getNickname() + " is trying to leave channel");
 
-	std::map<std::string, Channel>::iterator it =
-		channels.find(toIrcUpperCase(command.args[0]));
+	std::map<std::string, Channel>::iterator it = channels.find(toIrcUpperCase(command.args[0]));
 
 	if (it == channels.end()) {
 		return client.setSendData(nosuchchannel(client, command.args[0]));
@@ -338,8 +337,7 @@ void Server::part(Client &client, Command &command) {
 	while (chanIt != chs.end()) {
 		if (toIrcUpperCase((*chanIt)->getName()) == toIrcUpperCase(command.args[0])) {
 			if (command.args.size() != 2)
-				return removeClientFromChannel(client, **chanIt,
-											   ":" + client.getNickname());
+				return removeClientFromChannel(client, **chanIt, ":" + client.getNickname());
 			else
 				return removeClientFromChannel(client, **chanIt, command.args[1]);
 		}
