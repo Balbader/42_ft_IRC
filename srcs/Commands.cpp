@@ -158,11 +158,15 @@ void Server::join(Client &client, Command &command) {
 	}
 
 	std::set<char> &chModes = ch.getMode();
+
+    // user limit
 	if (chModes.find('l') != chModes.end()) {
 		if (ch.getClients().size() >= ch.getUserLimit()) {
 			return client.setSendData(channelisfull(client, ch));
 		}
 	}
+
+    // invite only
 	if (chModes.find('i') != chModes.end()) {
 		if (!ch.isInvited(client.getNickname())) {
 			return client.setSendData(inviteonlychan(client, ch));
@@ -170,6 +174,8 @@ void Server::join(Client &client, Command &command) {
 		ch.removeInvited(client.getNickname());
 		return successfulJoin(client, ch);
 	}
+
+    // set pasword
 	if (sentPassword) {
 		if (!ch.evalPassword(command.args[1]))
 			return client.setSendData(badchannelkey(client, ch.getName()));
