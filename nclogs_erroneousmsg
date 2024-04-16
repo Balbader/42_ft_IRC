@@ -1,0 +1,17 @@
+2024-04-16 15:00:30 [Server] [parseCommands] INFO Parsing commands from data: NICK tamer
+
+2024-04-16 15:00:30 [Server] [executeCommands] INFO Executing commands
+prefix=  cmd= 
+Am I here 
+2024-04-16 15:00:30 [Server] [executeCommands] INFO Client (unidentified) on fd 4 sent: NICK
+2024-04-16 15:00:30 [Server] [nick] INFO Client  is trying to change nickname
+2024-04-16 15:00:30 [Server] [erroneusnickname] INFO Sending erroneusnickname response to 
+2024-04-16 15:00:30 [Server] [sendDataThroughSocket] INFO Sending data to fd 4
+2024-04-16 15:00:30 [Server] [sendDataThroughSocket] INFO :localhost 432  tamer
+ :Erroneus nickname
+
+[CLIENT PART]
+NICK tamer
+:localhost 432  tamer
+ :Erroneus nickname
+

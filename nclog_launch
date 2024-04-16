@@ -1,0 +1,41 @@
+2024-04-16 13:18:59 [Server] [setupSocket] INFO Creating socket...
+2024-04-16 13:18:59 [Server] [setupSocket] INFO Binding socket to ipv4 address...
+2024-04-16 13:18:59 [Server] [setupSocket] INFO Listening on socket...
+2024-04-16 13:18:59 [Server] [startServer] INFO Starting server...
+2024-04-16 13:20:49 [Server] [serverEventHandling] INFO New server event caught
+2024-04-16 13:20:49 [Server] [addNewClient] INFO Adding new client...
+2024-04-16 13:20:49 [Server] [addNewClient] INFO Accepting connection...
+2024-04-16 13:20:49 [Client] [~Client] INFO client destructor called
+2024-04-16 13:20:49 [Client] [~Cliente] INFO client destructor finished
+2024-04-16 13:20:49 [Client] [~Client] INFO client destructor called
+2024-04-16 13:20:49 [Client] [~Cliente] INFO client destructor finished
+2024-04-16 13:20:49 [Server] [addNewClient] INFO New connection established with 127.0.0.1 on fd 4
+2024-04-16 13:20:49 [Client] [~Client] INFO client destructor called
+2024-04-16 13:20:49 [Client] [~Cliente] INFO client destructor finished
+2024-04-16 13:20:58 [Server] [clientEventHandling] INFO POLLIN caught
+2024-04-16 13:20:58 [Server] [receiveDataFromSocket] INFO Receiving data from fd 4
+2024-04-16 13:20:58 [Server] [parseCommands] INFO Parsing commands from data: NICK tamer
+
+2024-04-16 13:20:58 [Server] [executeCommands] INFO Executing commands
+2024-04-16 13:21:18 [Server] [clientEventHandling] INFO POLLIN caught
+2024-04-16 13:21:18 [Server] [receiveDataFromSocket] INFO Receiving data from fd 4
+2024-04-16 13:21:18 [Server] [parseCommands] INFO Parsing commands from data: USER tamer lapute
+
+2024-04-16 13:21:18 [Server] [executeCommands] INFO Executing commands
+2024-04-16 13:21:38 [Server] [clientEventHandling] INFO POLLIN caught
+2024-04-16 13:21:38 [Server] [receiveDataFromSocket] INFO Receiving data from fd 4
+2024-04-16 13:21:38 [Server] [parseCommands] INFO Parsing commands from data: JOIN #disney
+
+2024-04-16 13:21:38 [Server] [executeCommands] INFO Executing commands
+2024-04-16 13:32:47 [Server] [clientEventHandling] INFO POLLIN caught
+2024-04-16 13:32:47 [Server] [receiveDataFromSocket] INFO Receiving data from fd 4
+2024-04-16 13:32:47 [Server] [unexpectedDisconnectHandling] INFO Handling unexpected disconnection...
+2024-04-16 13:32:47 [Server] [parseCommands] INFO Parsing commands from data: 
+2024-04-16 13:32:47 [Server] [executeCommands] INFO Executing commands
+2024-04-16 13:32:47 [Server] [disconnectHandling] INFO Disconnecting client on fd 4
+2024-04-16 13:32:47 [Server] [ejectClient] INFO Ejecting client on fd 4
+2024-04-16 13:32:47 [Client] [~Client] INFO client destructor called
+2024-04-16 13:32:47 [Client] [~Cliente] INFO client destructor finished
+2024-04-16 13:32:47 [Server] [ejectClient] INFO Client left. (fd : 4)
+^C2024-04-16 13:32:54 [Server] [~Server] INFO Shutting down server...
+
