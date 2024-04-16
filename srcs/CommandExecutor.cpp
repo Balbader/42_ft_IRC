@@ -9,8 +9,6 @@ void Server::executeCommands(Client &client, std::vector<Command> &commands) {
 
     // interate over commands
 	std::vector<Command>::iterator it = commands.begin();
-	std::cout << "prefix= " << it->prefix << " cmd= " /*<< it->cmd << " | args= " << it->args */<< std::endl;
-    std::cout << "Am I here " << std::endl;
 
 	for (; it != commands.end(); it++) {
         // update nickname if identified
