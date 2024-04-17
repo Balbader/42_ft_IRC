@@ -42,6 +42,7 @@ private:
 	std::map<std::string, Channel> channels;
 	std::vector<pollfd> pollFds;
 	struct sockaddr_in address;
+  bool maxClientsFlag;
 
 	bool isPortInvalid(int port);
 	bool isPasswdInvalid(std::string passwd);
@@ -52,13 +53,13 @@ private:
 	void sendDataThroughSocket(Client &client);
 
 	/* server event handler */
-	void handleServerEvents();
+	bool handleServerEvents();
 	void handleClientEvents();
 	void handleDisconnectionEvents();
 	void handleEmptyChannelEvents();
 
 	/* server connection manager */
-	void addNewClient();
+	bool addNewClient();
 	void unexpectedDisconnectHandling(int fd);
 	void ejectClient(int clientFd, int reason);
 	void removeChannel(std::string name);

@@ -1,0 +1,15 @@
+l be rejected
+2024-04-17 12:48:29 [Server] [serverEventHandling] INFO New server event caught
+2024-04-17 12:48:29 [Server] [addNewClient] INFO Adding new client...
+2024-04-17 12:48:29 [Server] [addNewClient] ERROR The maximum number of clients connected to the server has been reached. The connection will be rejected
+2024-04-17 12:48:29 [Server] [serverEventHandling] INFO New server event caught
+2024-04-17 12:48:29 [Server] [addNewClient] INFO Adding new client...
+2024-04-17 12:48:29 [Server] [addNewClient] ERROR The maximum number of clients connected to the server has been reached. The connection will be rejected
+2024-04-17 12:48:29 [Server] [serverEventHandling] INFO New server event caught
+2024-04-17 12:48:29 [Server] [addNewClient] INFO Adding new client...
+2024-04-17 12:48:29 [Server] [addNewClient] ERROR The maximum number of clients connected to the server has been reached. The connection will be rejected
+2024-04-17 12:48:29 [Server] [serverEventHandling] INFO New server event caught
+2024-04-17 12:48:29 [Se^C2024-04-17 12:48:29 [Server] [serverEventHandling] INFO New server event caught
+2024-04-17 12:48:29 [Server] [addNewClient] INFO Adding new client...
+2024-04-17 12:48:29 [Server] [addNewClient] ERROR The maximum number of clients connected to the server has been reached. The connection will be rejected
+
