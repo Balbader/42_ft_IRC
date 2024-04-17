@@ -27,7 +27,7 @@
 #define LOSTCONNECTION 0
 #define QUITED 1
 #define KICKED 2
-#define MAX_CLIENTS 5
+#define MAX_CLIENTS 20
 #define FORBIDDEN_CHARS " ,*?!@$.#&:\r\n\0\a+"
 
 class Server {
