@@ -198,6 +198,8 @@ std::string Server::namreply(Client &client, Channel &channel, bool found) {
 
 		ss << ":localhost 353 " << client.getNickname();
 		ss << " = " << channel.getName() << " :";
+
+        // FIX: remove creator in order to not have the extra user created when join is used
 		if (creator) {
 			ss << "!" << creator->getNickname() << " ";
 		}
