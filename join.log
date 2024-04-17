@@ -1,0 +1,16 @@
+2024-04-17 15:30:28 [Server] [executeCommands] INFO Client ftuernal on fd 4 sent: JOIN
+2024-04-17 15:30:28 [Server] [join] INFO Client ftuernal is trying to join channel #clearchan
+2024-04-17 15:30:28 [Channel] [~Channel] INFO Deleting channel 
+2024-04-17 15:30:28 [Channel] [~Channel] INFO Deleting channel 
+2024-04-17 15:30:28 [Channel] [initialize] INFO Initializing channel #clearchan
+I'm here : initialize(std::string name, Client &op)
+2024-04-17 15:30:28 [Channel] [broadcast] INFO Broadcasting message to all clients in channel #clearchan
+2024-04-17 15:30:28 [Server] [notopic] INFO Sending notopic response to ftuernal
+2024-04-17 15:30:28 [Server] [namreply] INFO Sending namreply response to ftuernal
+2024-04-17 15:30:28 [Channel] [broadcast] INFO Broadcasting message to all clients in channel #clearchan
+2024-04-17 15:30:28 [Server] [sendDataThroughSocket] INFO Sending data to fd 4
+2024-04-17 15:30:28 [Server] [sendDataThroughSocket] INFO :ftuernal!ftuernal@ftuernal JOIN :#clearchan
+:localhost 331 ftuernal #clearchan :No topic is set
+:localhost 353 ftuernal = #clearchan :!ftuernal @ftuernal 
+:localhost 366 ftuernal #clearchan :End of NAMES list
+

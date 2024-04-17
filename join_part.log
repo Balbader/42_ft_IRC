@@ -1,0 +1,33 @@
+2024-04-17 14:59:16 [Server] [clientEventHandling] INFO POLLIN caught
+2024-04-17 14:59:16 [Server] [receiveDataFromSocket] INFO Receiving data from fd 5
+2024-04-17 14:59:16 [Server] [parseCommands] INFO Parsing commands from data: JOIN #mychan
+
+2024-04-17 14:59:16 [Server] [executeCommands] INFO Executing commands
+2024-04-17 14:59:16 [Server] [executeCommands] INFO Client ftuernal on fd 5 sent: JOIN
+2024-04-17 14:59:16 [Server] [join] INFO Client ftuernal is trying to join channel #mychan
+2024-04-17 14:59:16 [Channel] [~Channel] INFO Deleting channel 
+2024-04-17 14:59:16 [Channel] [~Channel] INFO Deleting channel 
+2024-04-17 14:59:16 [Channel] [initialize] INFO Initializing channel #mychan
+2024-04-17 14:59:16 [Channel] [broadcast] INFO Broadcasting message to all clients in channel #mychan
+2024-04-17 14:59:16 [Server] [notopic] INFO Sending notopic response to ftuernal
+2024-04-17 14:59:16 [Server] [namreply] INFO Sending namreply response to ftuernal
+2024-04-17 14:59:16 [Channel] [broadcast] INFO Broadcasting message to all clients in channel #mychan
+2024-04-17 14:59:16 [Server] [sendDataThroughSocket] INFO Sending data to fd 5
+2024-04-17 14:59:16 [Server] [sendDataThroughSocket] INFO :ftuernal!ftuernal@ftuernal JOIN :#mychan
+:localhost 331 ftuernal #mychan :No topic is set
+:localhost 353 ftuernal = #mychan :!ftuernal @ftuernal 
+:localhost 366 ftuernal #mychan :End of NAMES list
+
+2024-04-17 14:59:27 [Server] [clientEventHandling] INFO POLLIN caught
+2024-04-17 14:59:27 [Server] [receiveDataFromSocket] INFO Receiving data from fd 5
+2024-04-17 14:59:27 [Server] [parseCommands] INFO Parsing commands from data: PART #mychan
+
+2024-04-17 14:59:27 [Server] [executeCommands] INFO Executing commands
+2024-04-17 14:59:27 [Server] [executeCommands] INFO Client ftuernal on fd 5 sent: PART
+2024-04-17 14:59:27 [Server] [part] INFO Client ftuernal is trying to leave channel
+2024-04-17 14:59:27 [Server] [removeClientFromChannel] INFO Removing client ftuernal from channel #mychan
+2024-04-17 14:59:27 [Channel] [removeClient] INFO removing client ftuernal
+2024-04-17 14:59:27 [Channel] [removeClient] INFO client is creator
+2024-04-17 14:59:27 [Channel] [asureOperator] INFO Checking the need for a new oper
+2024-04-17 14:59:27 [Channel] [~Channel] INFO Deleting channel #mychan
+

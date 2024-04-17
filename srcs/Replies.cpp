@@ -205,7 +205,7 @@ std::string Server::namreply(Client &client, Channel &channel, bool found) {
 		std::map<Client *, unsigned int>::iterator cli =
 			channel.getClients().begin();
 
-		while (cli != channel.getClients().end()) {
+		while (cli != channel.getClients().end() /*&& cli->first != creator*/) {
 			if (cli->second & USER_OPERATOR) {
 				ss << "@";
 			}

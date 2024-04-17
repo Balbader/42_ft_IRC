@@ -167,6 +167,8 @@ void Channel::initialize(std::string name, std::string password, Client &op) {
 	LOGGER.info("initialize", "Initializing channel " + name);
 	this->name = name;
 	this->password = password;
+	// std::pair<std::map<Client*, unsigned int>::iterator, bool> res = this->clients.insert(std::make_pair(&op, USER_OPERATOR));
+  // std::cout << "is res is 0 then indicates failure in insert function: [" << res.second << "]" << std::endl;
 	this->clients.insert(std::make_pair(&op, USER_OPERATOR));
 	this->initialized = true;
 	this->modes.insert('t');
@@ -176,10 +178,18 @@ void Channel::initialize(std::string name, std::string password, Client &op) {
 void Channel::initialize(std::string name, Client &op) {
 	LOGGER.info("initialize", "Initializing channel " + name);
 	this->name = name;
+	// std::pair<std::map<Client*, unsigned int>::iterator, bool> res = this->clients.insert(std::make_pair(&op, USER_OPERATOR));
+  // std::cout << "is res is 0 then indicates failure in insert function: [" << res.second << "]" << std::endl;
 	this->clients.insert(std::make_pair(&op, USER_OPERATOR));
 	this->initialized = true;
 	this->modes.insert('t');
 	this->creator = &op;
+  if (this->creator != &op) {
+    std::cout << "something is wrong" << std::endl;
+  }
+  else {
+    std::cout << "look somewhere else" << std::endl;
+  }
 }
 
 bool Channel::evalPassword(std::string psw) { return (password == psw); }

@@ -187,11 +187,14 @@ void Server::join(Client &client, Command &command) {
 	}
 
     // channel initialization
+  
+
 	Channel &ch = channels[toIrcUpperCase(command.args[0])];
 	if (!ch.isInitialized()) {
 		if (sentPassword) {
 			ch.initialize(command.args[0], command.args[1], client);
 		} else {
+      // std::cout << "do i explode here?"<< command.args[1] << std::endl;
 			ch.initialize(command.args[0], client);
 		}
 	}
