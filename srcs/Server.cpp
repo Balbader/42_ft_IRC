@@ -10,6 +10,7 @@ Server::Server(std::string const &passwd, int const &port) {
 	if (isPasswdInvalid(passwd))
 		throw std::invalid_argument("Invalid passwd");
 
+  this->maxClientsFlag = false;
 	this->passwd = passwd;
 	this->port = port;
 	this->socket = 0;
@@ -109,8 +110,9 @@ void Server::startServer() {
 
     // main server loop
 	while (online) {
-		events = poll(pollFds.data(), static_cast<nfds_t>(pollFds.size()), -1);
-		if (events >= 0) {
+		events = poll(pollFds.data(), static_cast<nfds_t>(pollFds.size()), 0);
+    // std::cout << "events== "<< events << std::endl;
+		if (events > 0) {
 			handleServerEvents();
 			handleClientEvents();
 			handleDisconnectionEvents();

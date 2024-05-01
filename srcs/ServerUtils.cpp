@@ -42,6 +42,7 @@ void Server::trimAll(std::string& str) {
 */
 void Server::cleanEndOfTransmission(std::string &str) {
     str.erase(std::remove(str.begin(), str.end(), '\4'), str.end());
+    str.erase(std::remove(str.begin(), str.end(), '\n'), str.end());
 }
 
 /*
@@ -109,13 +110,18 @@ std::vector<Command> Server::parseCommands(std::string data) {
 	LOGGER.info("parseCommands", "Parsing commands from data: " + data);
 
     // command extraction loop
-	while (data.find("\r\n") != std::string::npos) {
-		pos = data.find("\r\n");
-		if (pos > 0) {
-			commands.push_back(messageToCommand(data.substr(0, pos)));
-			data.erase(0, pos + 2);
-		}
-	}
+  if (data.find("\r\n") != std::string::npos) {
+	 while (data.find("\r\n") != std::string::npos) {
+		 pos = data.find("\r\n");
+		 if (pos > 0) {
+		  	commands.push_back(messageToCommand(data.substr(0, pos)));
+			 data.erase(0, pos + 2);
+		 }
+	 }
+  }
+  else {
+    commands.push_back(messageToCommand(data));
+  }
 
     // return parsed commands
 	return commands;

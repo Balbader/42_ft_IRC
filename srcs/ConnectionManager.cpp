@@ -1,11 +1,12 @@
 #include <Server.hpp>
 
-void Server::addNewClient(void) {
+bool Server::addNewClient(void) {
     // initial logging and client limit check
 	LOGGER.info("addNewClient", "Adding new client...");
 	if (pollFds.size() >= MAX_CLIENTS) {
 		LOGGER.error("addNewClient", "The maximum number of clients connected to the server has been reached. The connection will be rejected");
-		return;
+    maxClientsFlag = true;
+		return false;
 	}
 
     // Prepare for accepting connection
@@ -17,7 +18,7 @@ void Server::addNewClient(void) {
     // connection error Handling
 	if (fd < 0) {
 		LOGGER.error("addNewClient", "Failed to accept connection");
-		return;
+		return false;
 	}
 
     // register new client
@@ -32,6 +33,7 @@ void Server::addNewClient(void) {
 	std::ostringstream logMessage;
 	logMessage << "New connection established with " << client.getHostname() << " on fd " << fd;
 	LOGGER.info("addNewClient", logMessage.str());
+  return true;
 }
 
 void Server::unexpectedDisconnectHandling(int fd) {

@@ -1,0 +1,150 @@
+<< CAP LS
+<< NICK ftuernal
+<< USER ftuernal ftuernal irc.dal.net :Floriane TUERNAL-SABOTINOV
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Looking up your hostname...
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Checking Ident
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** Couldn't look up your hostname
+>> :choopa.nj.us.dal.net NOTICE AUTH :*** No Ident response
+>> :choopa.nj.us.dal.net 001 ftuernal :Welcome to the DALnet IRC Network ftuernal!~ftuernal@62.210.32.0
+<< MODE ftuernal +i
+>> :choopa.nj.us.dal.net 002 ftuernal :Your host is choopa.nj.us.dal.net, running version bahamut-2.2.2
+>> :choopa.nj.us.dal.net 003 ftuernal :This server was created Tue Aug 23 2022 at 00:35:14 EDT
+>> :choopa.nj.us.dal.net 004 ftuernal choopa.nj.us.dal.net bahamut-2.2.2 aAbcCdefFghHiIjkKmnoOPrRsSwxXy AbceiIjklLmMnoOpPrRsStv beIjklov
+>> :choopa.nj.us.dal.net 005 ftuernal NETWORK=DALnet SAFELIST MAXBANS=200 MAXCHANNELS=20 CHANNELLEN=32 KICKLEN=307 NICKLEN=30 TOPICLEN=307 MODES=6 CHANTYPES=# CHANLIMIT=#:20 PREFIX=(ohv)@%+ STATUSMSG=@%+ :are available on this server
+>> :choopa.nj.us.dal.net 005 ftuernal CASEMAPPING=ascii WATCH=128 SILENCE=10 ELIST=cmntu EXCEPTS INVEX CHANMODES=beI,k,jl,ciPAmMnOprRsSt MAXLIST=b:200,e:100,I:100 TARGMAX=DCCALLOW:,JOIN:,KICK:4,KILL:20,NOTICE:20,PART:,PRIVMSG:20,WHOIS:,WHOWAS: :are available on this server
+>> :choopa.nj.us.dal.net 251 ftuernal :There are 66 users and 7686 invisible on 36 servers
+>> :choopa.nj.us.dal.net 252 ftuernal 74 :IRC Operators online
+>> :choopa.nj.us.dal.net 254 ftuernal 3652 :channels formed
+>> :choopa.nj.us.dal.net 255 ftuernal :I have 270 clients and 1 servers
+>> :choopa.nj.us.dal.net 265 ftuernal :Current local users: 270 Max: 2193
+>> :choopa.nj.us.dal.net 266 ftuernal :Current global users: 7752 Max: 12809
+>> :choopa.nj.us.dal.net NOTICE ftuernal :*** Notice -- motd was last changed at 16/3/2021 11:13
+>> :choopa.nj.us.dal.net 375 ftuernal :- choopa.nj.us.dal.net Message of the Day - 
+>> :choopa.nj.us.dal.net 372 ftuernal :-16/3/2021 11:13
+>> :choopa.nj.us.dal.net 372 ftuernal :- Welcome to choopa.nj.us.dal.net!
+>> :choopa.nj.us.dal.net 372 ftuernal :- 
+>> :choopa.nj.us.dal.net 372 ftuernal :-   .,-:::::   ::   .:      ...         ...   ::::::::::. :::.
+>> :choopa.nj.us.dal.net 372 ftuernal :- ,;;;'````'  ,;;   ;;,  .;;;;;;;.   .;;;;;;;. `;;;```.;;;;;`;;
+>> :choopa.nj.us.dal.net 372 ftuernal :- [[[        ,[[[,,,[[[ ,[[     \[[,,[[     \[[,`]]nnn]]',[[ '[[,
+>> :choopa.nj.us.dal.net 372 ftuernal :- $$$        "$$$"""$$$ $$$,     $$$$$$,     $$$ $$$""  c$$$cc$$$c
+>> :choopa.nj.us.dal.net 372 ftuernal :- `88bo,__,o, 888   "88o"888,_ _,88P"888,_ _,88P 888o    888   888,
+>> :choopa.nj.us.dal.net 372 ftuernal :-   "YUMMMMMP"MMM    YMM  "YMMMMMP"   "YMMMMMP"  YMMMb   YMM   ""`
+>> :choopa.nj.us.dal.net 372 ftuernal :- 
+>> :choopa.nj.us.dal.net 372 ftuernal :- Server generously sponsored by http://www.choopa.com/
+>> :choopa.nj.us.dal.net 372 ftuernal :- 
+>> :choopa.nj.us.dal.net 372 ftuernal :- By connecting to this server you agree to be bound by the terms put forth
+>> :choopa.nj.us.dal.net 372 ftuernal :- in DALnet's Acceptable Use Policy (http://www.dal.net/aup/)
+>> :choopa.nj.us.dal.net 372 ftuernal :- 
+>> :choopa.nj.us.dal.net 372 ftuernal :- For questions; please contact choopa-staff@dal.net
+>> :choopa.nj.us.dal.net 376 ftuernal :End of /MOTD command.
+>> :choopa.nj.us.dal.net NOTICE ftuernal :*** Notice -- This server runs an open proxy monitor to prevent abuse.
+>> :choopa.nj.us.dal.net NOTICE ftuernal :*** Notice -- If you see connections on various ports from 108.61.240.240
+>> :choopa.nj.us.dal.net NOTICE ftuernal :*** Notice -- please disregard them, as they are the monitor in action.
+>> :choopa.nj.us.dal.net NOTICE ftuernal :*** Notice -- For more information please visit kline.dal.net/proxy/wingate.htm
+>> :ftuernal MODE ftuernal :+iH
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< JOIN #awsomechan
+>> :ftuernal!~ftuernal@558f-9d37-e822-d535-d3bd.210.62.ip JOIN :#awsomechan
+>> :choopa.nj.us.dal.net 353 ftuernal = #awsomechan :@ftuernal 
+>> :choopa.nj.us.dal.net 366 ftuernal #awsomechan :End of /NAMES list.
+<< MODE #awsomechan
+>> :choopa.nj.us.dal.net 324 ftuernal #awsomechan + 
+--> chanquery mode
+<< WHO #awsomechan
+>> :choopa.nj.us.dal.net 329 ftuernal #awsomechan 1713366881
+--> event 329
+>> :choopa.nj.us.dal.net 352 ftuernal #awsomechan ~ftuernal 558f-9d37-e822-d535-d3bd.210.62.ip choopa.nj.us.dal.net ftuernal H@ :0 Floriane TUERNAL-SABOTINOV
+--> silent event who
+>> :choopa.nj.us.dal.net 315 ftuernal #awsomechan :End of /WHO list.
+--> chanquery who end
+<< MODE #awsomechan b
+>> :choopa.nj.us.dal.net 368 ftuernal #awsomechan :End of Channel Ban List
+--> chanquery ban end
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PART #awsomechan
+>> :ftuernal!~ftuernal@558f-9d37-e822-d535-d3bd.210.62.ip PART #awsomechan
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< JOIN #a
+>> :ftuernal!~ftuernal@558f-9d37-e822-d535-d3bd.210.62.ip JOIN :#a
+>> :choopa.nj.us.dal.net 332 ftuernal #a :Haters are my favorite
+>> :choopa.nj.us.dal.net 333 ftuernal #a ninja!ninja@2605:6400:30:fc15:ec5a:84f6:2416:dfa2 1650921888
+>> :choopa.nj.us.dal.net 353 ftuernal = #a :ftuernal @ninja @Hitman @Solo 
+>> :choopa.nj.us.dal.net 366 ftuernal #a :End of /NAMES list.
+<< MODE #a
+>> :choopa.nj.us.dal.net 324 ftuernal #a +tnc 
+--> chanquery mode
+<< WHO #a
+>> :choopa.nj.us.dal.net 329 ftuernal #a 1699254669
+--> event 329
+>> :choopa.nj.us.dal.net 352 ftuernal #a ~ftuernal 558f-9d37-e822-d535-d3bd.210.62.ip choopa.nj.us.dal.net ftuernal H :0 Floriane TUERNAL-SABOTINOV
+--> silent event who
+>> :choopa.nj.us.dal.net 352 ftuernal #a ninja b143-e536-31c0-3213-6427.30.6400.2605.ip atw.hu.eu.dal.net ninja H@ :3 once a ninja , always a ninja
+--> silent event who
+>> :choopa.nj.us.dal.net 352 ftuernal #a ~Hitman 2a02:c206:2134:6933:b1f6:6071:c73c:d5d0 atw.hu.eu.dal.net Hitman H@ :3 Agent 47 ...
+--> silent event who
+>> :choopa.nj.us.dal.net 352 ftuernal #a ~Solo 2a02:c206:2134:6933:5148:6ec2:b3db:1c0 lion.tx.us.dal.net Solo H@ :3 Playing Solo with my gf ....
+--> silent event who
+>> :choopa.nj.us.dal.net 315 ftuernal #a :End of /WHO list.
+--> chanquery who end
+<< MODE #a b
+>> :choopa.nj.us.dal.net 368 ftuernal #a :End of Channel Ban List
+--> chanquery ban end
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PART #a
+>> :ftuernal!~ftuernal@558f-9d37-e822-d535-d3bd.210.62.ip PART #a
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong
+<< PING choopa.nj.us.dal.net
+>> :choopa.nj.us.dal.net PONG choopa.nj.us.dal.net :ftuernal
+--> lag pong

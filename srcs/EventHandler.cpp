@@ -1,16 +1,18 @@
 #include <Server.hpp>
 #include <sstream>
 
-void Server::handleServerEvents() {
+bool Server::handleServerEvents() {
     // check for incoming connections events
-	if (pollFds.at(0).revents & POLLIN) {
+	if (pollFds.at(0).revents & POLLIN && !maxClientsFlag) {
 
         // logging the event
 		LOGGER.info("serverEventHandling", "New server event caught");
 
         //adding a new client
-		addNewClient();
+		if (addNewClient() == false)
+      return false;
 	}
+  return true;
 }
 
 void Server::handleClientEvents() {
